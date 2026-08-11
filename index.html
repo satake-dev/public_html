@@ -180,6 +180,30 @@
       border-style: inset;
     }
 
+    .lang-switch {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .lang-button {
+      border: 2px outset #cccccc;
+      background: #c0c0c0;
+      color: #000000;
+      padding: 2px 6px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lang-button.active {
+      background: #000080;
+      color: #ffffff;
+      border-style: inset;
+    }
+
     .counter,
     .status {
       font-family: "Courier New", monospace;
@@ -262,7 +286,7 @@
     .badge-linux { background: linear-gradient(90deg, #000000, #444444); }
     .badge-debian { background: linear-gradient(90deg, #8a0036, #d70751); }
     .badge-irc { background: linear-gradient(90deg, #0b5bd3, #00b7ff); }
-    .badge-msn { background: linear-gradient(90deg, #4f8f00, #00a2ff); }
+    .badge-netscape { background: linear-gradient(90deg, #1f3f8f, #5aa0ff); }
     .badge-linkedin { background: linear-gradient(90deg, #004182, #0a66c2); }
 
     .quote {
@@ -323,10 +347,10 @@
 </head>
 <body>
   <div class="page">
-    <div class="topline">Netscape Navigator 4.7 :: https://satake.me/~thiago</div>
-    <div class="shellline">thiago@satake:~$ cat carreira.txt</div>
+    <div class="topline" id="topline">Netscape Navigator 4.7 :: https://satake.me/~thiago</div>
+    <div class="shellline" id="shellline">thiago@satake:~$ cat carreira.txt</div>
     <div class="marquee">
-      <marquee behavior="alternate" scrollamount="4">*** best viewed in 800x600 *** software architect mode: ON *** conectando mercado.exe ***</marquee>
+      <marquee behavior="alternate" scrollamount="4" id="marquee-text">*** best viewed in 800x600 *** software architect mode: ON *** conectando mercado.exe ***</marquee>
     </div>
 
     <table class="layout" role="presentation">
@@ -334,43 +358,50 @@
         <td class="sidebar">
           <div class="sidebar-inner">
             <div class="window">
-              <div class="window-title">user card</div>
+              <div class="window-title" id="user-card-title">user card</div>
               <div class="window-body">
                 <div class="ascii-box">
                   <div class="terminal-command">thiago@satake:~$ fortune | cowsay</div>
                   <pre class="terminal-output" id="fortune-output">loading retro wisdom...</pre>
                 </div>
                 <button class="terminal-button" type="button" id="fortune-button">run fortune | cowsay</button>
-                <p class="small"><strong>Handle:</strong> Thiago Seito Satake</p>
-                <p class="small"><strong>Location:</strong> Brazil</p>
-                <p class="small"><strong>Languages:</strong> Portuguese / English</p>
-                <p class="small"><strong>Current node:</strong> Hexing Group</p>
+                <p class="small"><strong id="handle-label">Handle:</strong> Thiago Seito Satake</p>
+                <p class="small"><strong id="location-label">Location:</strong> Brazil</p>
+                <p class="small">
+                  <strong id="languages-label">Languages:</strong>
+                  <span id="languages-text">Portuguese / English</span>
+                </p>
+                <div class="lang-switch">
+                  <button class="lang-button active" type="button" id="lang-pt">PT</button>
+                  <button class="lang-button" type="button" id="lang-en">EN</button>
+                </div>
+                <p class="small"><strong id="current-node-label">Current node:</strong> Hexing Group</p>
                 <p class="counter">VISITORS: 0001337</p>
-                <p class="status">IRC STATUS: <span class="status-online">/away but coding</span></p>
-                <p class="status">MSN STATUS: <span class="status-busy">ocupado construindo plataformas</span></p>
+                <p class="status"><span id="irc-status-label">IRC STATUS:</span> <span class="status-online" id="irc-status-text">/away but coding</span></p>
+                <p class="status"><span id="msn-status-label">MSN STATUS:</span> <span class="status-busy" id="msn-status-text">ocupado construindo plataformas</span></p>
               </div>
             </div>
 
             <div class="window">
-              <div class="window-title">quick launch</div>
+              <div class="window-title" id="quick-launch-title">quick launch</div>
               <div class="window-body">
                 <div class="badge-grid">
                   <a class="badge badge-linkedin" href="https://www.linkedin.com/in/thiagosatake" target="_blank" rel="noreferrer">LINKEDIN</a>
                   <a class="badge badge-linux" href="https://www.kernel.org/" target="_blank" rel="noreferrer">LINUX OK</a>
                   <a class="badge badge-debian" href="https://www.debian.org/" target="_blank" rel="noreferrer">DEBIAN</a>
                   <a class="badge badge-irc" href="#contato">IRC CHAT</a>
-                  <a class="badge badge-msn" href="#mercado">MSN BIZ</a>
+                  <a class="badge badge-netscape" href="https://isp.netscape.com/" target="_blank" rel="noreferrer">NETSCAPE</a>
                 </div>
               </div>
             </div>
 
             <div class="window">
-              <div class="window-title">sys specs</div>
+              <div class="window-title" id="sys-specs-title">sys specs</div>
               <div class="window-body small">
-                <p><strong>OS:</strong> enterprise-grade pragmatism</p>
-                <p><strong>Kernel:</strong> arquitetura + liderança técnica</p>
-                <p><strong>Uptime:</strong> 15+ anos entregando software</p>
-                <p><strong>Compiler:</strong> visão de produto, engenharia e execução</p>
+                <p><strong id="os-label">OS:</strong> <span id="os-text">enterprise-grade pragmatism</span></p>
+                <p><strong id="kernel-label">Kernel:</strong> <span id="kernel-text">arquitetura + liderança técnica</span></p>
+                <p><strong id="uptime-label">Uptime:</strong> <span id="uptime-text">15+ anos entregando software</span></p>
+                <p><strong id="compiler-label">Compiler:</strong> <span id="compiler-text">visão de produto, engenharia e execução</span></p>
               </div>
             </div>
           </div>
@@ -378,11 +409,11 @@
 
         <td>
           <div class="window">
-            <div class="window-title">README.NFO</div>
+            <div class="window-title" id="readme-title">README.NFO</div>
             <div class="window-body">
               <h1 class="hero-name">Thiago Seito Satake</h1>
-              <p class="hero-role">Software Architect + Technical Leader + builder de sistemas que precisam escalar de verdade</p>
-              <p>
+              <p class="hero-role" id="hero-role">Software Architect + Technical Leader + builder de sistemas que precisam escalar de verdade</p>
+              <p id="hero-description">
                 Profissional com mais de 15 anos de experiência em software, atuando entre arquitetura,
                 liderança técnica e entrega de plataformas para negócios complexos.
                 Hoje, segue em operação no <strong>Hexing Group</strong>, conectando estratégia, execução
@@ -396,73 +427,73 @@
                 <span>Bookmarks</span>
                 <span>Help</span>
               </div>
-              <p class="quote">
+              <p class="quote" id="hero-quote">
                 "Misturo visão arquitetural, liderança e mão no código para transformar requisitos difíceis em sistemas sustentáveis."
               </p>
             </div>
           </div>
 
           <div class="window" id="mercado">
-            <div class="window-title">market_positioning.txt</div>
+            <div class="window-title" id="market-title-bar">market_positioning.txt</div>
             <div class="window-body">
-              <h2 class="section-title">Posicionamento no mercado</h2>
+              <h2 class="section-title" id="market-title">Posicionamento no mercado</h2>
               <ul class="pixel-list">
-                <li>Arquiteto de software com perfil de liderança técnica e visão de longo prazo.</li>
-                <li>Experiência em ambientes corporativos, integrações críticas e plataformas orientadas a resultado.</li>
-                <li>Capacidade de traduzir contexto de negócio em arquitetura, governança técnica e entregas consistentes.</li>
-                <li>Atuação unindo estratégia, times e execução para reduzir complexidade e acelerar evolução de produto.</li>
+                <li id="market-item-1">Arquiteto de software com perfil de liderança técnica e visão de longo prazo.</li>
+                <li id="market-item-2">Experiência em ambientes corporativos, integrações críticas e plataformas orientadas a resultado.</li>
+                <li id="market-item-3">Capacidade de traduzir contexto de negócio em arquitetura, governança técnica e entregas consistentes.</li>
+                <li id="market-item-4">Atuação unindo estratégia, times e execução para reduzir complexidade e acelerar evolução de produto.</li>
               </ul>
-              <p><span class="blink">HOT!</span> Disponível para conversas estratégicas sobre arquitetura, liderança técnica e modernização de sistemas.</p>
+              <p id="market-hotline"><span class="blink">HOT!</span> Disponível para conversas estratégicas sobre arquitetura, liderança técnica e modernização de sistemas.</p>
             </div>
           </div>
 
           <div class="window">
-            <div class="window-title">career_highlights.dbf</div>
+            <div class="window-title" id="highlights-title-bar">career_highlights.dbf</div>
             <div class="window-body">
-              <h2 class="section-title">Destaques de carreira</h2>
+              <h2 class="section-title" id="highlights-title">Destaques de carreira</h2>
               <table class="experience-table">
                 <tr>
-                  <th>Arquivo</th>
-                  <th>Descrição</th>
+                  <th id="table-col-file">Arquivo</th>
+                  <th id="table-col-description">Descrição</th>
                 </tr>
                 <tr>
                   <td>current_role.sys</td>
-                  <td>Experiência atual vinculada ao <strong>Hexing Group</strong>, com atuação em contexto corporativo e técnico de alta responsabilidade.</td>
+                  <td id="highlight-current-role">Experiência atual vinculada ao <strong>Hexing Group</strong>, com atuação em contexto corporativo e técnico de alta responsabilidade.</td>
                 </tr>
                 <tr>
                   <td>education.edu</td>
-                  <td>Formação na <strong>Universidade Federal do Paraná (UFPR)</strong>.</td>
+                  <td id="highlight-education">Formação na <strong>Universidade Federal do Paraná (UFPR)</strong>.</td>
                 </tr>
                 <tr>
                   <td>enterprise_projects.log</td>
-                  <td>Projetos públicos no LinkedIn incluem <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> e <strong>TIM Brasil - MOVIR</strong>.</td>
+                  <td id="highlight-projects">Projetos públicos no LinkedIn incluem <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> e <strong>TIM Brasil - MOVIR</strong>.</td>
                 </tr>
                 <tr>
                   <td>research.pub</td>
-                  <td>Publicações em bioinformática, incluindo <strong>GARSA: genomic analysis resources for sequence annotation</strong> e <strong>ProtozoaDB</strong>.</td>
+                  <td id="highlight-research">Publicações em bioinformática, incluindo <strong>GARSA: genomic analysis resources for sequence annotation</strong> e <strong>ProtozoaDB</strong>.</td>
                 </tr>
               </table>
             </div>
           </div>
 
           <div class="window">
-            <div class="window-title">skillset.ini</div>
+            <div class="window-title" id="skillset-title-bar">skillset.ini</div>
             <div class="window-body">
-              <h2 class="section-title">O que levo para a mesa</h2>
+              <h2 class="section-title" id="skillset-title">O que levo para a mesa</h2>
               <ul class="pixel-list">
-                <li>Desenho de arquitetura com preocupação real com manutenção, evolução e custo operacional.</li>
-                <li>Liderança técnica para orientar times, elevar padrão de entrega e tomar decisões difíceis com clareza.</li>
-                <li>Leitura rápida de cenários complexos para priorizar onde simplificar, integrar ou reconstruir.</li>
-                <li>Comunicação com negócio e tecnologia sem perder profundidade técnica.</li>
+                <li id="skill-item-1">Desenho de arquitetura com preocupação real com manutenção, evolução e custo operacional.</li>
+                <li id="skill-item-2">Liderança técnica para orientar times, elevar padrão de entrega e tomar decisões difíceis com clareza.</li>
+                <li id="skill-item-3">Leitura rápida de cenários complexos para priorizar onde simplificar, integrar ou reconstruir.</li>
+                <li id="skill-item-4">Comunicação com negócio e tecnologia sem perder profundidade técnica.</li>
               </ul>
             </div>
           </div>
 
           <div class="window" id="contato">
-            <div class="window-title">contact.irc</div>
+            <div class="window-title" id="contact-title-bar">contact.irc</div>
             <div class="window-body">
-              <h2 class="section-title">Canal de contato</h2>
-              <p>
+              <h2 class="section-title" id="contact-title">Canal de contato</h2>
+              <p id="contact-text">
                 Para oportunidades, consultoria, liderança técnica ou arquitetura, o ponto de entrada oficial é o perfil no LinkedIn:
                 <br>
                 <strong>&gt;&gt;</strong> <a href="https://www.linkedin.com/in/thiagosatake" target="_blank" rel="noreferrer">linkedin.com/in/thiagosatake</a>
@@ -476,25 +507,144 @@
       </tr>
     </table>
 
-    <div class="footerline center">
+    <div class="footerline center" id="footerline">
       hosted on satake.me :: userdir vibes restored :: under heavy construction since the 90s
     </div>
   </div>
   <script>
     const fortunes = [
       {
+        pt: "Grandes sistemas sao construidos\\numa decisao clara de cada vez.",
         en: "Great systems are built\\none clear decision at a time."
       },
       {
+        pt: "Lidere com arquitetura,\\nmas nunca perca a camada humana.",
         en: "Lead with architecture,\\nbut never lose the human layer."
       },
       {
+        pt: "A complexidade diminui quando\\nestrategia encontra execucao.",
         en: "Complexity fades when\\nstrategy meets execution."
       },
       {
+        pt: "Codigo e temporario.\\nClareza e legado.",
         en: "Code is temporary.\\nClarity is legacy."
       }
     ];
+
+    const translations = {
+      pt: {
+        pageTitle: "~thiago :: carreira.exe",
+        topline: "Netscape Navigator 4.7 :: https://satake.me/~thiago",
+        shellline: "thiago@satake:~$ cat carreira.txt",
+        marqueeText: "*** best viewed in 800x600 *** software architect mode: ON *** conectando mercado.exe ***",
+        userCardTitle: "user card",
+        fortuneButton: "run fortune | cowsay",
+        handleLabel: "Handle:",
+        locationLabel: "Location:",
+        languagesLabel: "Languages:",
+        languagesText: "Portuguese / English",
+        currentNodeLabel: "Current node:",
+        ircStatusLabel: "IRC STATUS:",
+        ircStatusText: "/ausente, mas programando",
+        msnStatusLabel: "MSN STATUS:",
+        msnStatusText: "ocupado construindo plataformas",
+        quickLaunchTitle: "quick launch",
+        sysSpecsTitle: "sys specs",
+        osLabel: "OS:",
+        osText: "pragmatismo em nivel enterprise",
+        kernelLabel: "Kernel:",
+        kernelText: "arquitetura + lideranca tecnica",
+        uptimeLabel: "Uptime:",
+        uptimeText: "15+ anos entregando software",
+        compilerLabel: "Compiler:",
+        compilerText: "visao de produto, engenharia e execucao",
+        readmeTitle: "README.NFO",
+        heroRole: "Software Architect + Technical Leader + builder de sistemas que precisam escalar de verdade",
+        heroDescription: "Profissional com mais de 15 anos de experiência em software, atuando entre arquitetura, liderança técnica e entrega de plataformas para negócios complexos. Hoje, segue em operação no <strong>Hexing Group</strong>, conectando estratégia, execução e engenharia com foco em impacto real.",
+        heroQuote: "\"Misturo visão arquitetural, liderança e mão no código para transformar requisitos difíceis em sistemas sustentáveis.\"",
+        marketTitleBar: "market_positioning.txt",
+        marketTitle: "Posicionamento no mercado",
+        marketItem1: "Arquiteto de software com perfil de liderança técnica e visão de longo prazo.",
+        marketItem2: "Experiência em ambientes corporativos, integrações críticas e plataformas orientadas a resultado.",
+        marketItem3: "Capacidade de traduzir contexto de negócio em arquitetura, governança técnica e entregas consistentes.",
+        marketItem4: "Atuação unindo estratégia, times e execução para reduzir complexidade e acelerar evolução de produto.",
+        marketHotline: "<span class=\"blink\">HOT!</span> Disponível para conversas estratégicas sobre arquitetura, liderança técnica e modernização de sistemas.",
+        highlightsTitleBar: "career_highlights.dbf",
+        highlightsTitle: "Destaques de carreira",
+        tableColFile: "Arquivo",
+        tableColDescription: "Descrição",
+        highlightCurrentRole: "Experiência atual vinculada ao <strong>Hexing Group</strong>, com atuação em contexto corporativo e técnico de alta responsabilidade.",
+        highlightEducation: "Formação na <strong>Universidade Federal do Paraná (UFPR)</strong>.",
+        highlightProjects: "Projetos públicos no LinkedIn incluem <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> e <strong>TIM Brasil - MOVIR</strong>.",
+        highlightResearch: "Publicações em bioinformática, incluindo <strong>GARSA: genomic analysis resources for sequence annotation</strong> e <strong>ProtozoaDB</strong>.",
+        skillsetTitleBar: "skillset.ini",
+        skillsetTitle: "O que levo para a mesa",
+        skillItem1: "Desenho de arquitetura com preocupação real com manutenção, evolução e custo operacional.",
+        skillItem2: "Liderança técnica para orientar times, elevar padrão de entrega e tomar decisões difíceis com clareza.",
+        skillItem3: "Leitura rápida de cenários complexos para priorizar onde simplificar, integrar ou reconstruir.",
+        skillItem4: "Comunicação com negócio e tecnologia sem perder profundidade técnica.",
+        contactTitleBar: "contact.irc",
+        contactTitle: "Canal de contato",
+        contactText: "Para oportunidades, consultoria, liderança técnica ou arquitetura, o ponto de entrada oficial é o perfil no LinkedIn:<br><strong>&gt;&gt;</strong> <a href=\"https://www.linkedin.com/in/thiagosatake\" target=\"_blank\" rel=\"noreferrer\">linkedin.com/in/thiagosatake</a>",
+        footerline: "hosted on satake.me :: userdir vibes restored :: under heavy construction since the 90s"
+      },
+      en: {
+        pageTitle: "~thiago :: career.exe",
+        topline: "Netscape Navigator 4.7 :: https://satake.me/~thiago",
+        shellline: "thiago@satake:~$ cat career.txt",
+        marqueeText: "*** best viewed in 800x600 *** software architect mode: ON *** market mode engaged.exe ***",
+        userCardTitle: "user card",
+        fortuneButton: "run fortune | cowsay",
+        handleLabel: "Handle:",
+        locationLabel: "Location:",
+        languagesLabel: "Languages:",
+        languagesText: "Portuguese / English",
+        currentNodeLabel: "Current node:",
+        ircStatusLabel: "IRC STATUS:",
+        ircStatusText: "/away but coding",
+        msnStatusLabel: "MSN STATUS:",
+        msnStatusText: "busy building platforms",
+        quickLaunchTitle: "quick launch",
+        sysSpecsTitle: "sys specs",
+        osLabel: "OS:",
+        osText: "enterprise-grade pragmatism",
+        kernelLabel: "Kernel:",
+        kernelText: "architecture + technical leadership",
+        uptimeLabel: "Uptime:",
+        uptimeText: "15+ years shipping software",
+        compilerLabel: "Compiler:",
+        compilerText: "product vision, engineering and execution",
+        readmeTitle: "README.NFO",
+        heroRole: "Software Architect + Technical Leader + builder of systems that truly need to scale",
+        heroDescription: "Professional with more than 15 years of experience in software, operating across architecture, technical leadership and platform delivery for complex businesses. Currently active at <strong>Hexing Group</strong>, connecting strategy, execution and engineering with a focus on real impact.",
+        heroQuote: "\"I blend architectural vision, leadership and hands-on code to turn difficult requirements into sustainable systems.\"",
+        marketTitleBar: "market_positioning.txt",
+        marketTitle: "Market positioning",
+        marketItem1: "Software architect with a technical leadership profile and long-term vision.",
+        marketItem2: "Experience in enterprise environments, critical integrations and result-driven platforms.",
+        marketItem3: "Able to translate business context into architecture, technical governance and consistent delivery.",
+        marketItem4: "Works across strategy, teams and execution to reduce complexity and accelerate product evolution.",
+        marketHotline: "<span class=\"blink\">HOT!</span> Available for strategic conversations about architecture, technical leadership and system modernization.",
+        highlightsTitleBar: "career_highlights.dbf",
+        highlightsTitle: "Career highlights",
+        tableColFile: "File",
+        tableColDescription: "Description",
+        highlightCurrentRole: "Current experience tied to <strong>Hexing Group</strong>, operating in a high-responsibility corporate and technical context.",
+        highlightEducation: "Education at <strong>Federal University of Parana (UFPR)</strong>.",
+        highlightProjects: "Public LinkedIn projects include <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> and <strong>TIM Brasil - MOVIR</strong>.",
+        highlightResearch: "Bioinformatics publications including <strong>GARSA: genomic analysis resources for sequence annotation</strong> and <strong>ProtozoaDB</strong>.",
+        skillsetTitleBar: "skillset.ini",
+        skillsetTitle: "What I bring to the table",
+        skillItem1: "Architecture design with real concern for maintainability, evolution and operating cost.",
+        skillItem2: "Technical leadership to guide teams, raise delivery standards and make hard decisions clearly.",
+        skillItem3: "Fast reading of complex scenarios to prioritize where to simplify, integrate or rebuild.",
+        skillItem4: "Clear communication with business and technology without losing technical depth.",
+        contactTitleBar: "contact.irc",
+        contactTitle: "Contact channel",
+        contactText: "For opportunities, consulting, technical leadership or architecture work, the official entry point is the LinkedIn profile:<br><strong>&gt;&gt;</strong> <a href=\"https://www.linkedin.com/in/thiagosatake\" target=\"_blank\" rel=\"noreferrer\">linkedin.com/in/thiagosatake</a>",
+        footerline: "hosted on satake.me :: userdir vibes restored :: under heavy construction since the 90s"
+      }
+    };
 
     function buildBubbleLines(lines) {
       const width = lines.reduce((max, line) => Math.max(max, line.length), 0);
@@ -532,20 +682,105 @@
       ];
     }
 
+    let currentLanguage = "pt";
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function setHtml(id, value) {
+      document.getElementById(id).innerHTML = value;
+    }
+
+    function applyLanguage(language) {
+      const copy = translations[language];
+
+      document.documentElement.lang = language === "pt" ? "pt-BR" : "en";
+      document.title = copy.pageTitle;
+
+      setText("topline", copy.topline);
+      setText("shellline", copy.shellline);
+      setText("marquee-text", copy.marqueeText);
+      setText("user-card-title", copy.userCardTitle);
+      setText("fortune-button", copy.fortuneButton);
+      setText("handle-label", copy.handleLabel);
+      setText("location-label", copy.locationLabel);
+      setText("languages-label", copy.languagesLabel);
+      setText("languages-text", copy.languagesText);
+      setText("current-node-label", copy.currentNodeLabel);
+      setText("irc-status-label", copy.ircStatusLabel);
+      setText("irc-status-text", copy.ircStatusText);
+      setText("msn-status-label", copy.msnStatusLabel);
+      setText("msn-status-text", copy.msnStatusText);
+      setText("quick-launch-title", copy.quickLaunchTitle);
+      setText("sys-specs-title", copy.sysSpecsTitle);
+      setText("os-label", copy.osLabel);
+      setText("os-text", copy.osText);
+      setText("kernel-label", copy.kernelLabel);
+      setText("kernel-text", copy.kernelText);
+      setText("uptime-label", copy.uptimeLabel);
+      setText("uptime-text", copy.uptimeText);
+      setText("compiler-label", copy.compilerLabel);
+      setText("compiler-text", copy.compilerText);
+      setText("readme-title", copy.readmeTitle);
+      setText("hero-role", copy.heroRole);
+      setHtml("hero-description", copy.heroDescription);
+      setText("hero-quote", copy.heroQuote);
+      setText("market-title-bar", copy.marketTitleBar);
+      setText("market-title", copy.marketTitle);
+      setText("market-item-1", copy.marketItem1);
+      setText("market-item-2", copy.marketItem2);
+      setText("market-item-3", copy.marketItem3);
+      setText("market-item-4", copy.marketItem4);
+      setHtml("market-hotline", copy.marketHotline);
+      setText("highlights-title-bar", copy.highlightsTitleBar);
+      setText("highlights-title", copy.highlightsTitle);
+      setText("table-col-file", copy.tableColFile);
+      setText("table-col-description", copy.tableColDescription);
+      setHtml("highlight-current-role", copy.highlightCurrentRole);
+      setHtml("highlight-education", copy.highlightEducation);
+      setHtml("highlight-projects", copy.highlightProjects);
+      setHtml("highlight-research", copy.highlightResearch);
+      setText("skillset-title-bar", copy.skillsetTitleBar);
+      setText("skillset-title", copy.skillsetTitle);
+      setText("skill-item-1", copy.skillItem1);
+      setText("skill-item-2", copy.skillItem2);
+      setText("skill-item-3", copy.skillItem3);
+      setText("skill-item-4", copy.skillItem4);
+      setText("contact-title-bar", copy.contactTitleBar);
+      setText("contact-title", copy.contactTitle);
+      setHtml("contact-text", copy.contactText);
+      setText("footerline", copy.footerline);
+
+      document.getElementById("lang-pt").classList.toggle("active", language === "pt");
+      document.getElementById("lang-en").classList.toggle("active", language === "en");
+
+      currentLanguage = language;
+      renderFortune(currentFortune);
+    }
+
     function renderFortune(index) {
       const fortune = fortunes[index];
-      const bubble = buildBubbleLines(fortune.en.split("\\n"));
+      const bubble = buildBubbleLines(fortune[currentLanguage].split("\\n"));
       const cow = buildCow();
 
       document.getElementById("fortune-output").textContent = [...bubble, ...cow].join("\n");
     }
 
     let currentFortune = 0;
-    renderFortune(currentFortune);
+    applyLanguage(currentLanguage);
 
     document.getElementById("fortune-button").addEventListener("click", () => {
       currentFortune = (currentFortune + 1) % fortunes.length;
       renderFortune(currentFortune);
+    });
+
+    document.getElementById("lang-pt").addEventListener("click", () => {
+      applyLanguage("pt");
+    });
+
+    document.getElementById("lang-en").addEventListener("click", () => {
+      applyLanguage("en");
     });
   </script>
 </body>
