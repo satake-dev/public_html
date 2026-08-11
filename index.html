@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>~thiago :: carreira.exe</title>
+  <meta name="description" content="Página oldschool estilo anos 90 apresentando a carreira de Thiago Seito Satake, arquiteto de software e líder técnico.">
+  <style>
+    :root {
+      --bg: #001a66;
+      --panel: #c0c0c0;
+      --panel-dark: #808080;
+      --panel-light: #ffffff;
+      --text: #000000;
+      --link: #0000cc;
+      --link-visited: #660099;
+      --accent: #ffff66;
+      --green: #00ff66;
+      --red: #ff3366;
+      --cyan: #66ffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+      color: var(--text);
+      font-family: "Verdana", "Arial", sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    a {
+      color: var(--link);
+    }
+
+    a:visited {
+      color: var(--link-visited);
+    }
+
+    .page {
+      width: min(960px, calc(100% - 24px));
+      margin: 18px auto 28px;
+      border: 3px solid var(--panel-light);
+      border-right-color: var(--panel-dark);
+      border-bottom-color: var(--panel-dark);
+      background: var(--panel);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .topline,
+    .footerline {
+      background: #000080;
+      color: #ffffff;
+      padding: 6px 10px;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .shellline {
+      background: #000000;
+      color: var(--green);
+      padding: 6px 10px;
+      font-family: "Courier New", monospace;
+      border-top: 2px solid #ffffff;
+      border-bottom: 2px solid #808080;
+    }
+
+    .marquee {
+      padding: 8px 10px 0;
+      color: #000080;
+      font-weight: bold;
+    }
+
+    .layout {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .layout td {
+      vertical-align: top;
+      padding: 10px;
+    }
+
+    .sidebar {
+      width: 250px;
+      border-right: 2px dashed #808080;
+      background: #d6d6d6;
+    }
+
+    .sidebar-inner {
+      position: sticky;
+      top: 12px;
+    }
+
+    .window {
+      margin-bottom: 12px;
+      border: 2px solid var(--panel-light);
+      border-right-color: var(--panel-dark);
+      border-bottom-color: var(--panel-dark);
+      background: #efefef;
+    }
+
+    .window-title {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #ffffff;
+      padding: 4px 6px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .window-body {
+      padding: 8px;
+    }
+
+    .hero-name {
+      margin: 0 0 4px;
+      font-size: 30px;
+      color: #000080;
+      line-height: 1.1;
+    }
+
+    .hero-role {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #660000;
+    }
+
+    .ascii-box {
+      background: #000000;
+      color: var(--green);
+      padding: 8px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      min-height: 176px;
+      overflow: auto;
+    }
+
+    .terminal-command {
+      margin: 0 0 8px;
+      color: #66ffff;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    .terminal-output {
+      display: block;
+      margin: 0;
+      min-height: 130px;
+      white-space: pre;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .terminal-button {
+      margin-top: 8px;
+      border: 2px outset #cccccc;
+      background: #c0c0c0;
+      color: #000000;
+      padding: 4px 8px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .terminal-button:active {
+      border-style: inset;
+    }
+
+    .counter,
+    .status {
+      font-family: "Courier New", monospace;
+      font-weight: bold;
+    }
+
+    .status-online {
+      color: #008000;
+    }
+
+    .status-busy {
+      color: #cc0000;
+    }
+
+    .blink {
+      animation: blink 1s steps(2, start) infinite;
+      font-weight: bold;
+      color: var(--red);
+    }
+
+    @keyframes blink {
+      to { visibility: hidden; }
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      color: #000080;
+      font-size: 18px;
+    }
+
+    .pixel-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .pixel-list li {
+      margin-bottom: 6px;
+    }
+
+    .experience-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+    }
+
+    .experience-table th,
+    .experience-table td {
+      border: 1px solid #808080;
+      padding: 6px;
+      text-align: left;
+    }
+
+    .experience-table th {
+      background: #000080;
+      color: #ffffff;
+    }
+
+    .badge-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px;
+      height: 31px;
+      text-align: center;
+      text-decoration: none;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      border: 2px outset #dddddd;
+      color: #ffffff !important;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .badge-linux { background: linear-gradient(90deg, #000000, #444444); }
+    .badge-debian { background: linear-gradient(90deg, #8a0036, #d70751); }
+    .badge-irc { background: linear-gradient(90deg, #0b5bd3, #00b7ff); }
+    .badge-msn { background: linear-gradient(90deg, #4f8f00, #00a2ff); }
+    .badge-linkedin { background: linear-gradient(90deg, #004182, #0a66c2); }
+
+    .quote {
+      margin: 10px 0 0;
+      padding: 8px;
+      background: #ffffcc;
+      border: 1px dashed #666666;
+      font-style: italic;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .small {
+      font-size: 12px;
+    }
+
+    .toolbar {
+      margin-top: 8px;
+      padding: 6px;
+      background: #dcdcdc;
+      border: 1px solid #999999;
+    }
+
+    .toolbar span {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 2px 6px;
+      border: 1px solid #666666;
+      background: #f4f4f4;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .layout,
+      .layout tbody,
+      .layout tr,
+      .layout td {
+        display: block;
+        width: 100%;
+      }
+
+      .sidebar {
+        border-right: 0;
+        border-bottom: 2px dashed #808080;
+      }
+
+      .sidebar-inner {
+        position: static;
+      }
+
+      .hero-name {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topline">Netscape Navigator 4.7 :: https://satake.me/~thiago</div>
+    <div class="shellline">thiago@satake:~$ cat carreira.txt</div>
+    <div class="marquee">
+      <marquee behavior="alternate" scrollamount="4">*** best viewed in 800x600 *** software architect mode: ON *** conectando mercado.exe ***</marquee>
+    </div>
+
+    <table class="layout" role="presentation">
+      <tr>
+        <td class="sidebar">
+          <div class="sidebar-inner">
+            <div class="window">
+              <div class="window-title">user card</div>
+              <div class="window-body">
+                <div class="ascii-box">
+                  <div class="terminal-command">thiago@satake:~$ fortune | cowsay</div>
+                  <pre class="terminal-output" id="fortune-output">loading retro wisdom...</pre>
+                </div>
+                <button class="terminal-button" type="button" id="fortune-button">run fortune | cowsay</button>
+                <p class="small"><strong>Handle:</strong> Thiago Seito Satake</p>
+                <p class="small"><strong>Location:</strong> Brazil</p>
+                <p class="small"><strong>Languages:</strong> Portuguese / English</p>
+                <p class="small"><strong>Current node:</strong> Hexing Group</p>
+                <p class="counter">VISITORS: 0001337</p>
+                <p class="status">IRC STATUS: <span class="status-online">/away but coding</span></p>
+                <p class="status">MSN STATUS: <span class="status-busy">ocupado construindo plataformas</span></p>
+              </div>
+            </div>
+
+            <div class="window">
+              <div class="window-title">quick launch</div>
+              <div class="window-body">
+                <div class="badge-grid">
+                  <a class="badge badge-linkedin" href="https://www.linkedin.com/in/thiagosatake" target="_blank" rel="noreferrer">LINKEDIN</a>
+                  <a class="badge badge-linux" href="https://www.kernel.org/" target="_blank" rel="noreferrer">LINUX OK</a>
+                  <a class="badge badge-debian" href="https://www.debian.org/" target="_blank" rel="noreferrer">DEBIAN</a>
+                  <a class="badge badge-irc" href="#contato">IRC CHAT</a>
+                  <a class="badge badge-msn" href="#mercado">MSN BIZ</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="window">
+              <div class="window-title">sys specs</div>
+              <div class="window-body small">
+                <p><strong>OS:</strong> enterprise-grade pragmatism</p>
+                <p><strong>Kernel:</strong> arquitetura + liderança técnica</p>
+                <p><strong>Uptime:</strong> 15+ anos entregando software</p>
+                <p><strong>Compiler:</strong> visão de produto, engenharia e execução</p>
+              </div>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div class="window">
+            <div class="window-title">README.NFO</div>
+            <div class="window-body">
+              <h1 class="hero-name">Thiago Seito Satake</h1>
+              <p class="hero-role">Software Architect + Technical Leader + builder de sistemas que precisam escalar de verdade</p>
+              <p>
+                Profissional com mais de 15 anos de experiência em software, atuando entre arquitetura,
+                liderança técnica e entrega de plataformas para negócios complexos.
+                Hoje, segue em operação no <strong>Hexing Group</strong>, conectando estratégia, execução
+                e engenharia com foco em impacto real.
+              </p>
+              <div class="toolbar">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Go</span>
+                <span>Bookmarks</span>
+                <span>Help</span>
+              </div>
+              <p class="quote">
+                "Misturo visão arquitetural, liderança e mão no código para transformar requisitos difíceis em sistemas sustentáveis."
+              </p>
+            </div>
+          </div>
+
+          <div class="window" id="mercado">
+            <div class="window-title">market_positioning.txt</div>
+            <div class="window-body">
+              <h2 class="section-title">Posicionamento no mercado</h2>
+              <ul class="pixel-list">
+                <li>Arquiteto de software com perfil de liderança técnica e visão de longo prazo.</li>
+                <li>Experiência em ambientes corporativos, integrações críticas e plataformas orientadas a resultado.</li>
+                <li>Capacidade de traduzir contexto de negócio em arquitetura, governança técnica e entregas consistentes.</li>
+                <li>Atuação unindo estratégia, times e execução para reduzir complexidade e acelerar evolução de produto.</li>
+              </ul>
+              <p><span class="blink">HOT!</span> Disponível para conversas estratégicas sobre arquitetura, liderança técnica e modernização de sistemas.</p>
+            </div>
+          </div>
+
+          <div class="window">
+            <div class="window-title">career_highlights.dbf</div>
+            <div class="window-body">
+              <h2 class="section-title">Destaques de carreira</h2>
+              <table class="experience-table">
+                <tr>
+                  <th>Arquivo</th>
+                  <th>Descrição</th>
+                </tr>
+                <tr>
+                  <td>current_role.sys</td>
+                  <td>Experiência atual vinculada ao <strong>Hexing Group</strong>, com atuação em contexto corporativo e técnico de alta responsabilidade.</td>
+                </tr>
+                <tr>
+                  <td>education.edu</td>
+                  <td>Formação na <strong>Universidade Federal do Paraná (UFPR)</strong>.</td>
+                </tr>
+                <tr>
+                  <td>enterprise_projects.log</td>
+                  <td>Projetos públicos no LinkedIn incluem <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> e <strong>TIM Brasil - MOVIR</strong>.</td>
+                </tr>
+                <tr>
+                  <td>research.pub</td>
+                  <td>Publicações em bioinformática, incluindo <strong>GARSA: genomic analysis resources for sequence annotation</strong> e <strong>ProtozoaDB</strong>.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="window">
+            <div class="window-title">skillset.ini</div>
+            <div class="window-body">
+              <h2 class="section-title">O que levo para a mesa</h2>
+              <ul class="pixel-list">
+                <li>Desenho de arquitetura com preocupação real com manutenção, evolução e custo operacional.</li>
+                <li>Liderança técnica para orientar times, elevar padrão de entrega e tomar decisões difíceis com clareza.</li>
+                <li>Leitura rápida de cenários complexos para priorizar onde simplificar, integrar ou reconstruir.</li>
+                <li>Comunicação com negócio e tecnologia sem perder profundidade técnica.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="window" id="contato">
+            <div class="window-title">contact.irc</div>
+            <div class="window-body">
+              <h2 class="section-title">Canal de contato</h2>
+              <p>
+                Para oportunidades, consultoria, liderança técnica ou arquitetura, o ponto de entrada oficial é o perfil no LinkedIn:
+                <br>
+                <strong>&gt;&gt;</strong> <a href="https://www.linkedin.com/in/thiagosatake" target="_blank" rel="noreferrer">linkedin.com/in/thiagosatake</a>
+              </p>
+              <p class="center small">
+                <strong>[ #thiago | linux | debian | irc | msn | arquitetura | software ]</strong>
+              </p>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="footerline center">
+      hosted on satake.me :: userdir vibes restored :: under heavy construction since the 90s
+    </div>
+  </div>
+  <script>
+    const fortunes = [
+      {
+        en: "Great systems are built\\none clear decision at a time."
+      },
+      {
+        en: "Lead with architecture,\\nbut never lose the human layer."
+      },
+      {
+        en: "Complexity fades when\\nstrategy meets execution."
+      },
+      {
+        en: "Code is temporary.\\nClarity is legacy."
+      }
+    ];
+
+    function buildBubbleLines(lines) {
+      const width = lines.reduce((max, line) => Math.max(max, line.length), 0);
+      const top = " " + "_".repeat(width + 2);
+      const bottom = " " + "-".repeat(width + 2);
+
+      const bubble = lines.map((line, index) => {
+        const padded = line.padEnd(width, " ");
+
+        if (lines.length === 1) {
+          return "< " + padded + " >";
+        }
+
+        if (index === 0) {
+          return "/ " + padded + " \\";
+        }
+
+        if (index === lines.length - 1) {
+          return "\\ " + padded + " /";
+        }
+
+        return "| " + padded + " |";
+      });
+
+      return [top, ...bubble, bottom];
+    }
+
+    function buildCow() {
+      return [
+        "        \\   ^__^",
+        "         \\  (oo)\\\\_______",
+        "            (__)\\\\       )\\\\/\\\\",
+        "                ||----w |",
+        "                ||     ||"
+      ];
+    }
+
+    function renderFortune(index) {
+      const fortune = fortunes[index];
+      const bubble = buildBubbleLines(fortune.en.split("\\n"));
+      const cow = buildCow();
+
+      document.getElementById("fortune-output").textContent = [...bubble, ...cow].join("\n");
+    }
+
+    let currentFortune = 0;
+    renderFortune(currentFortune);
+
+    document.getElementById("fortune-button").addEventListener("click", () => {
+      currentFortune = (currentFortune + 1) % fortunes.length;
+      renderFortune(currentFortune);
+    });
+  </script>
+</body>
+</html>
