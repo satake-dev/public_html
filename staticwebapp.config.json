@@ -1,0 +1,17 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "redirect": "/~thiago",
+      "statusCode": 302
+    },
+    {
+      "route": "/~thiago",
+      "rewrite": "/index.html"
+    },
+    {
+      "route": "/~thiago/*",
+      "rewrite": "/index.html"
+    }
+  ]
+}
