@@ -2,7 +2,7 @@
 
 🌐 **[https://satake.me/~thiago](https://satake.me/~thiago)**
 
-[![Deploy](https://github.com/satake-dev/public_html/actions/workflows/azure-static-web-apps-red-ocean-0c82af80f.yml/badge.svg)](https://github.com/satake-dev/public_html/actions/workflows/azure-static-web-apps-red-ocean-0c82af80f.yml)
+[![Deploy](https://github.com/satake-dev/public_html/actions/workflows/azure-static-web-apps-green-flower-0D5672E0F.yml/badge.svg)](https://github.com/satake-dev/public_html/actions/workflows/azure-static-web-apps-green-flower-0D5672E0F.yml)
 
 ## From local user folders to cloud-native publishing
 
