@@ -93,7 +93,7 @@
     }
 
     .sidebar {
-      width: 250px;
+      width: 320px;
       border-right: 2px dashed #808080;
       background: #d6d6d6;
     }
@@ -210,12 +210,94 @@
       font-weight: bold;
     }
 
+    .hit-counter {
+      margin: 8px 0 4px;
+      text-align: center;
+    }
+
+    .hit-counter-label {
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      font-weight: bold;
+      color: #555555;
+      letter-spacing: 0.12em;
+      margin-bottom: 3px;
+    }
+
+    .hit-counter-display {
+      display: inline-flex;
+      gap: 2px;
+      background: #0a0a0a;
+      padding: 5px 7px;
+      border: 2px solid #444444;
+      border-top-color: #222222;
+      border-left-color: #222222;
+    }
+
+    .digit {
+      display: inline-block;
+      width: 15px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      background: #000000;
+      color: #ff2200;
+      font-family: "Courier New", monospace;
+      font-size: 17px;
+      font-weight: bold;
+      border: 1px solid #2a0000;
+      text-shadow: 0 0 4px #ff4400;
+    }
+
     .status-online {
       color: #008000;
     }
 
     .status-busy {
       color: #cc0000;
+    }
+
+    .retro-calendar {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      border: 1px solid #808080;
+      background: #ffffff;
+      margin-top: 6px;
+    }
+
+    .cal-header {
+      background: #000080;
+      color: #ffffff;
+      text-align: center;
+      padding: 3px 6px;
+      font-weight: bold;
+      letter-spacing: 0.06em;
+    }
+
+    .retro-calendar table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .retro-calendar th {
+      background: #c0c0c0;
+      color: #000080;
+      text-align: center;
+      padding: 2px;
+      font-weight: bold;
+      border-bottom: 1px solid #808080;
+    }
+
+    .retro-calendar td {
+      text-align: center;
+      padding: 2px 3px;
+      color: #000000;
+    }
+
+    .retro-calendar td.cal-today {
+      background: #000080;
+      color: var(--accent);
+      font-weight: bold;
     }
 
     .blink {
@@ -283,11 +365,48 @@
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
     }
 
-    .badge-linux { background: linear-gradient(90deg, #000000, #444444); }
+    .badge-valid-html { background: linear-gradient(90deg, #005a9c, #0077cc); }
+    .badge-valid-css  { background: linear-gradient(90deg, #005a9c, #0099cc); }
     .badge-debian { background: linear-gradient(90deg, #8a0036, #d70751); }
     .badge-irc { background: linear-gradient(90deg, #0b5bd3, #00b7ff); }
     .badge-netscape { background: linear-gradient(90deg, #1f3f8f, #5aa0ff); }
     .badge-linkedin { background: linear-gradient(90deg, #004182, #0a66c2); }
+    .badge-gnu { background: linear-gradient(90deg, #5c3317, #a0522d); }
+    .badge-vim { background: linear-gradient(90deg, #007f00, #00b300); }
+    .badge-w3c { background: linear-gradient(90deg, #003a70, #005a9c); }
+    .badge-so { background: linear-gradient(90deg, #b34000, #f48024); }
+
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 2px outset #dddddd;
+      background: #c0c0c0;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .icon-link:hover {
+      background: #d8d8d8;
+    }
+
+    .icon-link:active {
+      border-style: inset;
+    }
+
+    .icon-link img {
+      width: 22px;
+      height: 22px;
+      image-rendering: pixelated;
+    }
 
     .quote {
       margin: 10px 0 0;
@@ -348,7 +467,7 @@
 <body>
   <div class="page">
     <div class="topline" id="topline">https://satake.me/~thiago</div>
-    <div class="shellline" id="shellline">thiago@satake:~$ cat carreira.txt</div>
+    <div class="shellline" id="shellline">thiago@satake.me:~$ cat carreira.txt</div>
     <div class="marquee">
       <marquee behavior="alternate" scrollamount="4" id="marquee-text">*** best viewed in 800x600 *** software architect mode: ON *** conectando mercado.exe ***</marquee>
     </div>
@@ -361,7 +480,7 @@
               <div class="window-title" id="user-card-title">user card</div>
               <div class="window-body">
                 <div class="ascii-box">
-                  <div class="terminal-command">thiago@satake:~$ fortune | cowsay</div>
+                  <div class="terminal-command">thiago@satake.me:~$ fortune | cowsay</div>
                   <pre class="terminal-output" id="fortune-output">loading retro wisdom...</pre>
                 </div>
                 <button class="terminal-button" type="button" id="fortune-button">run fortune | cowsay</button>
@@ -375,22 +494,26 @@
                   <button class="lang-button active" type="button" id="lang-pt">PT</button>
                   <button class="lang-button" type="button" id="lang-en">EN</button>
                 </div>
-                <p class="small"><strong id="current-node-label">Current node:</strong> Hexing Group</p>
-                <p class="counter">VISITORS: 0001337</p>
-                <p class="status"><span id="irc-status-label">IRC STATUS:</span> <span class="status-online" id="irc-status-text">/away but coding</span></p>
-                <p class="status"><span id="msn-status-label">MSN STATUS:</span> <span class="status-busy" id="msn-status-text">ocupado construindo plataformas</span></p>
+                <div class="retro-calendar" id="retro-calendar"></div>
+                <div class="hit-counter" id="live-counter-wrap" style="display:none">
+                  <div class="hit-counter-label">YOU ARE VISITOR #</div>
+                  <div class="hit-counter-display" id="live-counter-display"></div>
+                </div>
               </div>
             </div>
 
             <div class="window">
               <div class="window-title" id="quick-launch-title">quick launch</div>
               <div class="window-body">
-                <div class="badge-grid">
-                  <a class="badge badge-linkedin" href="https://www.linkedin.com/in/thiagosatake" target="_blank" rel="noreferrer">LINKEDIN</a>
-                  <a class="badge badge-linux" href="https://www.kernel.org/" target="_blank" rel="noreferrer">LINUX OK</a>
-                  <a class="badge badge-debian" href="https://www.debian.org/" target="_blank" rel="noreferrer">DEBIAN</a>
-                  <a class="badge badge-irc" href="#contato">IRC CHAT</a>
-                  <a class="badge badge-netscape" href="https://isp.netscape.com/" target="_blank" rel="noreferrer">NETSCAPE</a>
+                <div class="icon-grid">
+                  <a class="icon-link" href="https://www.linkedin.com/in/thiagosatake" title="LinkedIn" target="_blank" rel="noreferrer"><img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://www.kernel.org/" title="Linux Kernel" target="_blank" rel="noreferrer"><img src="https://icons.duckduckgo.com/ip3/kernel.org.ico" alt="Linux" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://www.debian.org/" title="Debian" target="_blank" rel="noreferrer"><img src="https://www.debian.org/favicon.ico" alt="Debian" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://isp.netscape.com/" title="Netscape" target="_blank" rel="noreferrer"><img src="https://isp.netscape.com/favicon.ico" alt="Netscape" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://www.gnu.org/" title="GNU / FSF" target="_blank" rel="noreferrer"><img src="https://www.gnu.org/favicon.ico" alt="GNU" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://www.vim.org/" title="Vim" target="_blank" rel="noreferrer"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Vimlogo.svg" alt="Vim" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://www.w3.org/" title="W3C" target="_blank" rel="noreferrer"><img src="https://www.w3.org/favicon.ico" alt="W3C" width="22" height="22" loading="lazy"></a>
+                  <a class="icon-link" href="https://stackoverflow.com/" title="Stack Overflow" target="_blank" rel="noreferrer"><img src="https://stackoverflow.com/favicon.ico" alt="Stack Overflow" width="22" height="22" loading="lazy"></a>
                 </div>
               </div>
             </div>
@@ -400,7 +523,7 @@
               <div class="window-body small">
                 <p><strong id="os-label">OS:</strong> <span id="os-text">enterprise-grade pragmatism</span></p>
                 <p><strong id="kernel-label">Kernel:</strong> <span id="kernel-text">arquitetura + liderança técnica</span></p>
-                <p><strong id="uptime-label">Uptime:</strong> <span id="uptime-text">15+ anos entregando software</span></p>
+                <p><strong id="uptime-label">Uptime:</strong> <span id="uptime-text">~20 anos entregando software</span></p>
                 <p><strong id="compiler-label">Compiler:</strong> <span id="compiler-text">visão de produto, engenharia e execução</span></p>
               </div>
             </div>
@@ -412,12 +535,13 @@
             <div class="window-title" id="readme-title">README.NFO</div>
             <div class="window-body">
               <h1 class="hero-name">Thiago Seito Satake</h1>
-              <p class="hero-role" id="hero-role">Software Architect + Technical Leader + builder de sistemas que precisam escalar de verdade</p>
+              <p class="hero-role" id="hero-role">Coordenador de Arquitetura de Software · IoT · Veículos Elétricos · Hexing Group</p>
               <p id="hero-description">
-                Profissional com mais de 15 anos de experiência em software, atuando entre arquitetura,
-                liderança técnica e entrega de plataformas para negócios complexos.
-                Hoje, segue em operação no <strong>Hexing Group</strong>, conectando estratégia, execução
-                e engenharia com foco em impacto real.
+                Engenheiro de Bioprocessos e Biotecnologia pela <strong>UFPR</strong>, com pós-graduação em <strong>MBA em Gestão de Projetos</strong>.
+                Aproximadamente 20 anos de experiência em desenvolvimento de software, já atuou com grandes monólitos em servidores corporativos,
+                arquitetura SOA e microsserviços modernos na nuvem.
+                Atua hoje como <strong>Coordenador de Arquitetura de Software</strong> na multinacional chinesa <strong>Hexing Group</strong>,
+                com foco em IoT aplicado a carregadores de veículos elétricos e mobilidade.
               </p>
               <div class="toolbar">
                 <span>File</span>
@@ -458,19 +582,19 @@
                 </tr>
                 <tr>
                   <td>current_role.sys</td>
-                  <td id="highlight-current-role">Experiência atual vinculada ao <strong>Hexing Group</strong>, com atuação em contexto corporativo e técnico de alta responsabilidade.</td>
+                  <td id="highlight-current-role">Coordenador de Arquitetura de Software na <strong>Hexing Group</strong> (multinacional chinesa), com ênfase em <strong>IoT</strong>, carregadores de veículos elétricos e mobilidade.</td>
                 </tr>
                 <tr>
                   <td>education.edu</td>
-                  <td id="highlight-education">Formação na <strong>Universidade Federal do Paraná (UFPR)</strong>.</td>
-                </tr>
-                <tr>
-                  <td>enterprise_projects.log</td>
-                  <td id="highlight-projects">Projetos públicos no LinkedIn incluem <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> e <strong>TIM Brasil - MOVIR</strong>.</td>
+                  <td id="highlight-education">Engenharia de Bioprocessos e Biotecnologia — <strong>UFPR</strong>. Pós-graduação: <strong>MBA em Gestão de Projetos</strong>.</td>
                 </tr>
                 <tr>
                   <td>research.pub</td>
                   <td id="highlight-research">Publicações em bioinformática, incluindo <strong>GARSA: genomic analysis resources for sequence annotation</strong> e <strong>ProtozoaDB</strong>.</td>
+                </tr>
+                <tr>
+                  <td>certs.cer</td>
+                  <td id="highlight-certs"><strong>Microsoft Certified: Azure Fundamentals</strong> &bull; <strong>Azure Data Fundamentals</strong> &bull; <strong>Azure Developer Associate</strong></td>
                 </tr>
               </table>
             </div>
@@ -489,6 +613,55 @@
             </div>
           </div>
 
+          <div class="window" id="stack">
+            <div class="window-title" id="stack-title-bar">stack.cfg</div>
+            <div class="window-body">
+              <h2 class="section-title" id="stack-title">Stack principal</h2>
+              <table class="experience-table">
+                <tr>
+                  <th id="stack-col-category">Categoria</th>
+                  <th id="stack-col-tech">Tecnologias</th>
+                </tr>
+                <tr>
+                  <td id="stack-label-frontend">Frontend</td>
+                  <td>Angular &bull; TypeScript &bull; RxJS &bull; HTML5 &bull; CSS3</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-backend">Backend</td>
+                  <td>Java &bull; Spring Boot &bull; Spring Cloud &bull; REST APIs &bull; Microservices</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-cloud">Nuvem</td>
+                  <td>Azure &bull; AWS &bull; Google Cloud &bull; OCI</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-iac">Infra como C&oacute;digo</td>
+                  <td>Terraform &bull; Ansible &bull; CloudFormation &bull; Bicep</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-cicd">CI/CD</td>
+                  <td>GitHub Actions &bull; Azure DevOps &bull; Jenkins &bull; GitLab CI</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-containers">Containers &amp; Orquestra&ccedil;&atilde;o</td>
+                  <td>Docker &bull; Kubernetes &bull; Helm &bull; Podman</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-database">Banco de Dados</td>
+                  <td>PostgreSQL &bull; MySQL &bull; Oracle &bull; MongoDB &bull; Redis &bull; Cassandra</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-messaging">Mensageria &amp; Eventos</td>
+                  <td>Apache Kafka &bull; RabbitMQ &bull; Azure Service Bus &bull; ActiveMQ &bull; AMQP</td>
+                </tr>
+                <tr>
+                  <td id="stack-label-iot">IoT &amp; Protocolos</td>
+                  <td>OCPP &bull; OCPI &bull; WebSocket &bull; REST/HTTP</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
           <div class="window" id="contato">
             <div class="window-title" id="contact-title-bar">contact.irc</div>
             <div class="window-body">
@@ -499,7 +672,7 @@
                 <strong>&gt;&gt;</strong> <a href="https://www.linkedin.com/in/thiagosatake" target="_blank" rel="noreferrer">linkedin.com/in/thiagosatake</a>
               </p>
               <p class="center small">
-                <strong>[ #thiago | linux | debian | irc | msn | arquitetura | software ]</strong>
+                <strong>[ #thiago | linux | debian | arquitetura | software ]</strong>
               </p>
             </div>
           </div>
@@ -509,6 +682,14 @@
 
     <div class="footerline center" id="footerline">
       hosted on satake.me :: userdir vibes restored :: under heavy construction since the 90s
+    </div>
+    <div style="background:#000080;padding:8px 10px;text-align:center">
+      <a href="https://validator.w3.org/check?uri=https%3A%2F%2Fsatake.me%2F%7Ethiago" target="_blank" rel="noreferrer">
+        <img src="https://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!" width="88" height="31" style="border:0;margin:0 4px">
+      </a>
+      <a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fsatake.me%2F%7Ethiago" target="_blank" rel="noreferrer">
+        <img src="https://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" width="88" height="31" style="border:0;margin:0 4px">
+      </a>
     </div>
   </div>
   <script>
@@ -535,7 +716,7 @@
       pt: {
         pageTitle: "~thiago :: carreira.exe",
         topline: "https://satake.me/~thiago",
-        shellline: "thiago@satake:~$ cat carreira.txt",
+        shellline: "thiago@satake.me:~$ cat carreira.txt",
         marqueeText: "*** best viewed in 800x600 *** software architect mode: ON *** conectando mercado.exe ***",
         userCardTitle: "user card",
         fortuneButton: "run fortune | cowsay",
@@ -543,11 +724,6 @@
         locationLabel: "Location:",
         languagesLabel: "Languages:",
         languagesText: "Portuguese / English",
-        currentNodeLabel: "Current node:",
-        ircStatusLabel: "IRC STATUS:",
-        ircStatusText: "/ausente, mas programando",
-        msnStatusLabel: "MSN STATUS:",
-        msnStatusText: "ocupado construindo plataformas",
         quickLaunchTitle: "quick launch",
         sysSpecsTitle: "sys specs",
         osLabel: "OS:",
@@ -555,12 +731,12 @@
         kernelLabel: "Kernel:",
         kernelText: "arquitetura + lideranca tecnica",
         uptimeLabel: "Uptime:",
-        uptimeText: "15+ anos entregando software",
+        uptimeText: "~20 anos entregando software",
         compilerLabel: "Compiler:",
         compilerText: "visao de produto, engenharia e execucao",
         readmeTitle: "README.NFO",
-        heroRole: "Software Architect + Technical Leader + builder de sistemas que precisam escalar de verdade",
-        heroDescription: "Profissional com mais de 15 anos de experiência em software, atuando entre arquitetura, liderança técnica e entrega de plataformas para negócios complexos. Hoje, segue em operação no <strong>Hexing Group</strong>, conectando estratégia, execução e engenharia com foco em impacto real.",
+        heroRole: "Coordenador de Arquitetura de Software · IoT · Veículos Elétricos · Hexing Group",
+        heroDescription: "Engenheiro de Bioprocessos e Biotecnologia pela <strong>UFPR</strong>, com pós-graduação em <strong>MBA em Gestão de Projetos</strong>. Aproximadamente 20 anos de experiência em desenvolvimento de software, já atuou com grandes monólitos em servidores corporativos, arquitetura SOA e microsserviços modernos na nuvem. Atua hoje como <strong>Coordenador de Arquitetura de Software</strong> na multinacional chinesa <strong>Hexing Group</strong>, com foco em IoT aplicado a carregadores de veículos elétricos e mobilidade.",
         heroQuote: "\"Misturo visão arquitetural, liderança e mão no código para transformar requisitos difíceis em sistemas sustentáveis.\"",
         marketTitleBar: "market_positioning.txt",
         marketTitle: "Posicionamento no mercado",
@@ -573,16 +749,29 @@
         highlightsTitle: "Destaques de carreira",
         tableColFile: "Arquivo",
         tableColDescription: "Descrição",
-        highlightCurrentRole: "Experiência atual vinculada ao <strong>Hexing Group</strong>, com atuação em contexto corporativo e técnico de alta responsabilidade.",
-        highlightEducation: "Formação na <strong>Universidade Federal do Paraná (UFPR)</strong>.",
-        highlightProjects: "Projetos públicos no LinkedIn incluem <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> e <strong>TIM Brasil - MOVIR</strong>.",
+        highlightCurrentRole: "Coordenador de Arquitetura de Software na <strong>Hexing Group</strong> (multinacional chinesa), com ênfase em <strong>IoT</strong>, carregadores de veículos elétricos e mobilidade.",
+        highlightEducation: "Engenharia de Bioprocessos e Biotecnologia — <strong>UFPR</strong>. Pós-graduação: <strong>MBA em Gestão de Projetos</strong>.",
         highlightResearch: "Publicações em bioinformática, incluindo <strong>GARSA: genomic analysis resources for sequence annotation</strong> e <strong>ProtozoaDB</strong>.",
+        highlightCerts: "<strong>Microsoft Certified: Azure Fundamentals</strong> &bull; <strong>Azure Data Fundamentals</strong> &bull; <strong>Azure Developer Associate</strong>",
         skillsetTitleBar: "skillset.ini",
         skillsetTitle: "O que levo para a mesa",
         skillItem1: "Desenho de arquitetura com preocupação real com manutenção, evolução e custo operacional.",
         skillItem2: "Liderança técnica para orientar times, elevar padrão de entrega e tomar decisões difíceis com clareza.",
         skillItem3: "Leitura rápida de cenários complexos para priorizar onde simplificar, integrar ou reconstruir.",
         skillItem4: "Comunicação com negócio e tecnologia sem perder profundidade técnica.",
+        stackTitleBar: "stack.cfg",
+        stackTitle: "Stack principal",
+        stackColCategory: "Categoria",
+        stackColTech: "Tecnologias",
+        stackFrontend: "Frontend",
+        stackBackend: "Backend",
+        stackCloud: "Nuvem",
+        stackIac: "Infra como Código",
+        stackCicd: "CI/CD",
+        stackContainers: "Containers & Orquestração",
+        stackDatabase: "Banco de Dados",
+        stackMessaging: "Mensageria & Eventos",
+        stackIot: "IoT & Protocolos",
         contactTitleBar: "contact.irc",
         contactTitle: "Canal de contato",
         contactText: "Para oportunidades, consultoria, liderança técnica ou arquitetura, o ponto de entrada oficial é o perfil no LinkedIn:<br><strong>&gt;&gt;</strong> <a href=\"https://www.linkedin.com/in/thiagosatake\" target=\"_blank\" rel=\"noreferrer\">linkedin.com/in/thiagosatake</a>",
@@ -591,7 +780,7 @@
       en: {
         pageTitle: "~thiago :: career.exe",
         topline: "https://satake.me/~thiago",
-        shellline: "thiago@satake:~$ cat career.txt",
+        shellline: "thiago@satake.me:~$ cat career.txt",
         marqueeText: "*** best viewed in 800x600 *** software architect mode: ON *** market mode engaged.exe ***",
         userCardTitle: "user card",
         fortuneButton: "run fortune | cowsay",
@@ -599,11 +788,6 @@
         locationLabel: "Location:",
         languagesLabel: "Languages:",
         languagesText: "Portuguese / English",
-        currentNodeLabel: "Current node:",
-        ircStatusLabel: "IRC STATUS:",
-        ircStatusText: "/away but coding",
-        msnStatusLabel: "MSN STATUS:",
-        msnStatusText: "busy building platforms",
         quickLaunchTitle: "quick launch",
         sysSpecsTitle: "sys specs",
         osLabel: "OS:",
@@ -611,12 +795,12 @@
         kernelLabel: "Kernel:",
         kernelText: "architecture + technical leadership",
         uptimeLabel: "Uptime:",
-        uptimeText: "15+ years shipping software",
+        uptimeText: "~20 years shipping software",
         compilerLabel: "Compiler:",
         compilerText: "product vision, engineering and execution",
         readmeTitle: "README.NFO",
-        heroRole: "Software Architect + Technical Leader + builder of systems that truly need to scale",
-        heroDescription: "Professional with more than 15 years of experience in software, operating across architecture, technical leadership and platform delivery for complex businesses. Currently active at <strong>Hexing Group</strong>, connecting strategy, execution and engineering with a focus on real impact.",
+        heroRole: "Software Architecture Coordinator · IoT · Electric Vehicles · Hexing Group",
+        heroDescription: "Engineer in Bioprocesses and Biotechnology from <strong>UFPR</strong>, with a postgraduate degree in <strong>MBA in Project Management</strong>. About 20 years of software development experience, having worked with large monoliths on enterprise application servers, SOA architecture, and modern microservices in the cloud. Currently <strong>Software Architecture Coordinator</strong> at Chinese multinational <strong>Hexing Group</strong>, focused on IoT applied to electric vehicle chargers and mobility.",
         heroQuote: "\"I blend architectural vision, leadership and hands-on code to turn difficult requirements into sustainable systems.\"",
         marketTitleBar: "market_positioning.txt",
         marketTitle: "Market positioning",
@@ -629,16 +813,29 @@
         highlightsTitle: "Career highlights",
         tableColFile: "File",
         tableColDescription: "Description",
-        highlightCurrentRole: "Current experience tied to <strong>Hexing Group</strong>, operating in a high-responsibility corporate and technical context.",
-        highlightEducation: "Education at <strong>Federal University of Parana (UFPR)</strong>.",
-        highlightProjects: "Public LinkedIn projects include <strong>Petrobrás - CRM Focus</strong>, <strong>HPA Replacement - HSBC</strong> and <strong>TIM Brasil - MOVIR</strong>.",
+        highlightCurrentRole: "Software Architecture Coordinator at <strong>Hexing Group</strong> (Chinese multinational), with emphasis on <strong>IoT</strong>, electric vehicle chargers and mobility.",
+        highlightEducation: "Bioprocesses and Biotechnology Engineering — <strong>UFPR</strong>. Postgraduate: <strong>MBA in Project Management</strong>.",
         highlightResearch: "Bioinformatics publications including <strong>GARSA: genomic analysis resources for sequence annotation</strong> and <strong>ProtozoaDB</strong>.",
+        highlightCerts: "<strong>Microsoft Certified: Azure Fundamentals</strong> &bull; <strong>Azure Data Fundamentals</strong> &bull; <strong>Azure Developer Associate</strong>",
         skillsetTitleBar: "skillset.ini",
         skillsetTitle: "What I bring to the table",
         skillItem1: "Architecture design with real concern for maintainability, evolution and operating cost.",
         skillItem2: "Technical leadership to guide teams, raise delivery standards and make hard decisions clearly.",
         skillItem3: "Fast reading of complex scenarios to prioritize where to simplify, integrate or rebuild.",
         skillItem4: "Clear communication with business and technology without losing technical depth.",
+        stackTitleBar: "stack.cfg",
+        stackTitle: "Main stack",
+        stackColCategory: "Category",
+        stackColTech: "Technologies",
+        stackFrontend: "Frontend",
+        stackBackend: "Backend",
+        stackCloud: "Cloud",
+        stackIac: "Infrastructure as Code",
+        stackCicd: "CI/CD",
+        stackContainers: "Containers & Orchestration",
+        stackDatabase: "Databases",
+        stackMessaging: "Messaging & Events",
+        stackIot: "IoT & Protocols",
         contactTitleBar: "contact.irc",
         contactTitle: "Contact channel",
         contactText: "For opportunities, consulting, technical leadership or architecture work, the official entry point is the LinkedIn profile:<br><strong>&gt;&gt;</strong> <a href=\"https://www.linkedin.com/in/thiagosatake\" target=\"_blank\" rel=\"noreferrer\">linkedin.com/in/thiagosatake</a>",
@@ -707,11 +904,7 @@
       setText("location-label", copy.locationLabel);
       setText("languages-label", copy.languagesLabel);
       setText("languages-text", copy.languagesText);
-      setText("current-node-label", copy.currentNodeLabel);
-      setText("irc-status-label", copy.ircStatusLabel);
-      setText("irc-status-text", copy.ircStatusText);
-      setText("msn-status-label", copy.msnStatusLabel);
-      setText("msn-status-text", copy.msnStatusText);
+      buildCalendar(language);
       setText("quick-launch-title", copy.quickLaunchTitle);
       setText("sys-specs-title", copy.sysSpecsTitle);
       setText("os-label", copy.osLabel);
@@ -739,14 +932,27 @@
       setText("table-col-description", copy.tableColDescription);
       setHtml("highlight-current-role", copy.highlightCurrentRole);
       setHtml("highlight-education", copy.highlightEducation);
-      setHtml("highlight-projects", copy.highlightProjects);
       setHtml("highlight-research", copy.highlightResearch);
+      setHtml("highlight-certs", copy.highlightCerts);
       setText("skillset-title-bar", copy.skillsetTitleBar);
       setText("skillset-title", copy.skillsetTitle);
       setText("skill-item-1", copy.skillItem1);
       setText("skill-item-2", copy.skillItem2);
       setText("skill-item-3", copy.skillItem3);
       setText("skill-item-4", copy.skillItem4);
+      setText("stack-title-bar", copy.stackTitleBar);
+      setText("stack-title", copy.stackTitle);
+      setText("stack-col-category", copy.stackColCategory);
+      setText("stack-col-tech", copy.stackColTech);
+      setText("stack-label-frontend", copy.stackFrontend);
+      setText("stack-label-backend", copy.stackBackend);
+      setText("stack-label-cloud", copy.stackCloud);
+      setText("stack-label-iac", copy.stackIac);
+      setText("stack-label-cicd", copy.stackCicd);
+      setText("stack-label-containers", copy.stackContainers);
+      setText("stack-label-database", copy.stackDatabase);
+      setText("stack-label-messaging", copy.stackMessaging);
+      setText("stack-label-iot", copy.stackIot);
       setText("contact-title-bar", copy.contactTitleBar);
       setText("contact-title", copy.contactTitle);
       setHtml("contact-text", copy.contactText);
@@ -759,6 +965,38 @@
       renderFortune(currentFortune);
     }
 
+    function buildCalendar(lang) {
+      const monthNames = {
+        pt: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+        en: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+      };
+      const dayNames = {
+        pt: ["D","S","T","Q","Q","S","S"],
+        en: ["Su","Mo","Tu","We","Th","Fr","Sa"]
+      };
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const today = now.getDate();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      let html = `<div class="cal-header">${monthNames[lang][month]} ${year}</div>`;
+      html += "<table><tr>";
+      dayNames[lang].forEach(d => { html += `<th>${d}</th>`; });
+      html += "</tr><tr>";
+      for (let i = 0; i < firstDay; i++) html += "<td></td>";
+      let dow = firstDay;
+      for (let d = 1; d <= daysInMonth; d++) {
+        const cls = d === today ? " class=\"cal-today\"" : "";
+        html += `<td${cls}>${d}</td>`;
+        dow++;
+        if (dow % 7 === 0 && d < daysInMonth) html += "</tr><tr>";
+      }
+      html += "</tr></table>";
+      document.getElementById("retro-calendar").innerHTML = html;
+    }
+
     function renderFortune(index) {
       const fortune = fortunes[index];
       const bubble = buildBubbleLines(fortune[currentLanguage].split("\\n"));
@@ -769,6 +1007,17 @@
 
     let currentFortune = 0;
     applyLanguage(currentLanguage);
+
+    // increment on each visit and display live count
+    fetch("https://api.counterapi.dev/v1/satake-me/visits/up")
+      .then(r => r.json())
+      .then(data => {
+        const count = String(data.count || 0).padStart(6, "0");
+        document.getElementById("live-counter-display").innerHTML =
+          count.split("").map(d => `<span class="digit">${d}</span>`).join("");
+        document.getElementById("live-counter-wrap").style.display = "";
+      })
+      .catch(() => {});
 
     document.getElementById("fortune-button").addEventListener("click", () => {
       currentFortune = (currentFortune + 1) % fortunes.length;
