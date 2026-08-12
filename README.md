@@ -1,5 +1,7 @@
 # public_html
 
+🌐 **[satake.me/~thiago](https://satake.me/~thiago)**
+
 ## From local user folders to cloud-native publishing
 
 This repository is both a personal website and a small historical tribute to how web publishing has evolved.
