@@ -1,6 +1,6 @@
 # public_html
 
-🌐 **[https://satake.me/~thiago](https://satake.me/~thiago)**
+🌐 **[https://www.satake.me/~thiago](https://www.satake.me/~thiago)**
 
 [![Deploy](https://github.com/satake-dev/public_html/actions/workflows/azure-static-web-apps-green-flower-0D5672E0F.yml/badge.svg)](https://github.com/satake-dev/public_html/actions/workflows/azure-static-web-apps-green-flower-0D5672E0F.yml)
 
