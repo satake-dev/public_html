@@ -215,6 +215,12 @@
       text-align: center;
     }
 
+    .mega-counter-holder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .hit-counter-label {
       font-family: "Courier New", monospace;
       font-size: 10px;
@@ -222,6 +228,32 @@
       color: #555555;
       letter-spacing: 0.12em;
       margin-bottom: 3px;
+    }
+
+    .mega-counter-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      gap: 3px;
+      background: #000000;
+      border: 2px inset #808080;
+    }
+
+    .mega-counter-prefix {
+      color: #66ffff;
+      font-family: "Courier New", monospace;
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 0;
+      line-height: 30px;
+      text-shadow: 0 0 3px #00aaaa;
+    }
+
+    .mega-counter-link img {
+      display: block;
+      width: 32px;
+      height: 30px;
+      image-rendering: pixelated;
     }
 
     .hit-counter-display {
@@ -582,9 +614,13 @@
                   <button class="lang-button" type="button" id="lang-en">EN</button>
                 </div>
                 <div class="retro-calendar" id="retro-calendar"></div>
-                <div class="hit-counter" id="live-counter-wrap" style="display:none">
-                  <div class="hit-counter-label">YOU ARE VISITOR #</div>
-                  <div class="hit-counter-display" id="live-counter-display"></div>
+                <div class="hit-counter" id="live-counter-wrap">
+                  <div class="hit-counter-label">VISITAS</div>
+                  <div class="mega-counter-holder">
+                    <a title="Contador de Visitas do MegaContador" href="https://megacontador.com.br/">
+                      <img src="https://megacontador.com.br/img-0grMGMPFVdIibxJd-24.gif" alt="Contador de visitas">
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1115,13 +1151,6 @@
 
     let currentFortune = 0;
     applyLanguage(currentLanguage);
-
-    // Generate a random large visit counter for fun (retro vibes)
-    const randomVisits = Math.floor(Math.random() * 9000000) + 1000000;
-    const count = String(randomVisits).padStart(6, "0");
-    document.getElementById("live-counter-display").innerHTML =
-      count.split("").map(d => `<span class="digit">${d}</span>`).join("");
-    document.getElementById("live-counter-wrap").style.display = "";
 
     document.getElementById("fortune-button").addEventListener("click", () => {
       currentFortune = (currentFortune + 1) % fortunes.length;
