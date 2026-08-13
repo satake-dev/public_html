@@ -300,6 +300,80 @@
       font-weight: bold;
     }
 
+    .calendar-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 85px;
+      margin: 6px auto;
+      border: 3px solid;
+      border-color: #c0c0c0 #808080 #808080 #c0c0c0;
+      background: #e8e8e8;
+      box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080, 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-family: "MS Sans Serif", Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .calendar-badge-header {
+      background: #cc0000;
+      color: #ffffff;
+      width: 100%;
+      text-align: center;
+      padding: 4px 0 3px;
+      font-weight: bold;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      border-bottom: 2px solid #660000;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .calendar-badge-header::after {
+      content: "⋅ ⋅ ⋅ ⋅ ⋅";
+      position: absolute;
+      top: -8px;
+      left: 0;
+      right: 0;
+      font-size: 8px;
+      letter-spacing: 8px;
+      color: #666666;
+      text-align: center;
+    }
+
+    .calendar-badge-content {
+      background: #f5f5f5;
+      width: 100%;
+      text-align: center;
+      padding: 6px 4px;
+      border: 1px solid #c0c0c0 inset;
+    }
+
+    .calendar-badge-month {
+      color: #cc0000;
+      font-weight: bold;
+      font-size: 13px;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .calendar-badge-day {
+      font-size: 36px;
+      font-weight: bold;
+      color: #000080;
+      margin: 2px 0 0;
+      line-height: 1;
+      font-family: "MS Sans Serif", Arial, sans-serif;
+    }
+
+    .calendar-badge-year {
+      font-size: 9px;
+      color: #000080;
+      font-weight: bold;
+      margin: 2px 0 0;
+    }
+
     .blink {
       animation: blink 1s steps(2, start) infinite;
       font-weight: bold;
@@ -460,6 +534,19 @@
 
       .hero-name {
         font-size: 24px;
+      }
+
+      .retro-calendar {
+        border: none;
+        background: transparent;
+      }
+
+      .retro-calendar table {
+        display: none;
+      }
+
+      .retro-calendar .calendar-badge {
+        display: flex;
       }
     }
   </style>
@@ -970,6 +1057,10 @@
         pt: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
         en: ["January","February","March","April","May","June","July","August","September","October","November","December"]
       };
+      const monthNamesShort = {
+        pt: ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"],
+        en: ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
+      };
       const dayNames = {
         pt: ["D","S","T","Q","Q","S","S"],
         en: ["Su","Mo","Tu","We","Th","Fr","Sa"]
@@ -981,19 +1072,36 @@
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      let html = `<div class="cal-header">${monthNames[lang][month]} ${year}</div>`;
-      html += "<table><tr>";
-      dayNames[lang].forEach(d => { html += `<th>${d}</th>`; });
-      html += "</tr><tr>";
-      for (let i = 0; i < firstDay; i++) html += "<td></td>";
-      let dow = firstDay;
-      for (let d = 1; d <= daysInMonth; d++) {
-        const cls = d === today ? " class=\"cal-today\"" : "";
-        html += `<td${cls}>${d}</td>`;
-        dow++;
-        if (dow % 7 === 0 && d < daysInMonth) html += "</tr><tr>";
+      const isMobile = window.innerWidth <= 760;
+      let html = "";
+
+      if (isMobile) {
+        // Formato badge estilo ícone dos anos 90
+        html = `<div class="calendar-badge">
+          <div class="calendar-badge-header">CALENDAR</div>
+          <div class="calendar-badge-content">
+            <div class="calendar-badge-month">${monthNamesShort[lang][month]}</div>
+            <div class="calendar-badge-day">${String(today).padStart(2, '0')}</div>
+            <div class="calendar-badge-year">${year}</div>
+          </div>
+        </div>`;
+      } else {
+        // Formato tabela para desktop
+        html = `<div class="cal-header">${monthNames[lang][month]} ${year}</div>`;
+        html += "<table><tr>";
+        dayNames[lang].forEach(d => { html += `<th>${d}</th>`; });
+        html += "</tr><tr>";
+        for (let i = 0; i < firstDay; i++) html += "<td></td>";
+        let dow = firstDay;
+        for (let d = 1; d <= daysInMonth; d++) {
+          const cls = d === today ? " class=\"cal-today\"" : "";
+          html += `<td${cls}>${d}</td>`;
+          dow++;
+          if (dow % 7 === 0 && d < daysInMonth) html += "</tr><tr>";
+        }
+        html += "</tr></table>";
       }
-      html += "</tr></table>";
+
       document.getElementById("retro-calendar").innerHTML = html;
     }
 
@@ -1008,16 +1116,12 @@
     let currentFortune = 0;
     applyLanguage(currentLanguage);
 
-    // increment on each visit and display live count
-    fetch("https://api.counterapi.dev/v1/satake-me/visits/up")
-      .then(r => r.json())
-      .then(data => {
-        const count = String(data.count || 0).padStart(6, "0");
-        document.getElementById("live-counter-display").innerHTML =
-          count.split("").map(d => `<span class="digit">${d}</span>`).join("");
-        document.getElementById("live-counter-wrap").style.display = "";
-      })
-      .catch(() => {});
+    // Generate a random large visit counter for fun (retro vibes)
+    const randomVisits = Math.floor(Math.random() * 9000000) + 1000000;
+    const count = String(randomVisits).padStart(6, "0");
+    document.getElementById("live-counter-display").innerHTML =
+      count.split("").map(d => `<span class="digit">${d}</span>`).join("");
+    document.getElementById("live-counter-wrap").style.display = "";
 
     document.getElementById("fortune-button").addEventListener("click", () => {
       currentFortune = (currentFortune + 1) % fortunes.length;
@@ -1030,6 +1134,11 @@
 
     document.getElementById("lang-en").addEventListener("click", () => {
       applyLanguage("en");
+    });
+
+    // Update calendar when window is resized
+    window.addEventListener("resize", () => {
+      buildCalendar(currentLanguage);
     });
   </script>
 </body>
