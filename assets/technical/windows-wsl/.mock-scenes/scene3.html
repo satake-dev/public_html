@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cloud CLI and Kubernetes</title>
+<style>
+  body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(165deg,#14181f,#0d1117);} 
+  .desktop{width:1600px;height:900px;position:relative;color:#ebf0f6;overflow:hidden}
+  .title{position:absolute;left:34px;top:24px;font-size:40px;font-weight:700}
+  .term{position:absolute;left:70px;top:116px;width:1460px;height:730px;background:#111417;border-radius:10px;border:2px solid #4b535e;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .bar{height:38px;background:#2c3139;border-radius:8px 8px 0 0;line-height:38px;padding:0 14px;font-weight:600}
+  .content{font-family:Consolas,monospace;font-size:22px;line-height:1.45;padding:14px 24px;white-space:pre;color:#d9f1d9}
+  .ok{color:#8ed1ff}
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="title">Cloud CLI + Docker + kubectl no WSL</div>
+  <div class="term">
+    <div class="bar">WSL Terminal - cloud ops</div>
+    <div class="content">$ aws sts get-caller-identity
+{"Account":"123456789012","Arn":"arn:aws:iam::123456789012:user/thiago"}
+$ az account show --output table
+Name                 CloudName    State   IsDefault
+Enterprise-Prod      AzureCloud   Enabled True
+$ oci iam region list | head -3
+key   name
+gru   sa-saopaulo-1
+$ docker compose up -d
+<span class="ok">[+] Running 5/5  network up  container api up  container web up</span>
+$ kubectl config get-contexts
+* aks-prod-br   ...   default
+$ kubectl get pods -n backend
+<span class="ok">backend-api-7d8c9f4cf8-k88zt  1/1 Running  0  12h</span>
+$ mvn clean verify -q
+<span class="ok">[INFO] BUILD SUCCESS</span>
+$ npx ng build --configuration production
+Initial chunk files  | Names  | Raw size  | Estimated transfer size</div>
+  </div>
+</div>
+</body>
+</html>

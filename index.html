@@ -546,6 +546,93 @@
       font-size: 12px;
     }
 
+    .technical-menu-intro {
+      margin: 0 0 10px;
+    }
+
+    .technical-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .technical-item {
+      border: 1px solid #808080;
+      background: #ffffff;
+      box-shadow: inset 1px 1px 0 #f5f5f5;
+    }
+
+    .technical-link {
+      width: 100%;
+      display: block;
+      text-decoration: none;
+      color: #000000;
+      padding: 8px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .technical-link:hover {
+      background: #e8f0ff;
+    }
+
+    .technical-link:focus-visible {
+      outline: 2px dashed #000080;
+      outline-offset: -2px;
+      background: #fff7cc;
+    }
+
+    .technical-link.unavailable {
+      color: #666666;
+      cursor: not-allowed;
+      background: #f0f0f0;
+    }
+
+    .technical-item-title {
+      display: block;
+      font-weight: bold;
+      color: #000080;
+      margin-bottom: 3px;
+    }
+
+    .technical-item-desc {
+      display: block;
+      font-size: 12px;
+      color: #2f2f2f;
+      margin-bottom: 4px;
+    }
+
+    .technical-item-hint {
+      display: block;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      color: #555555;
+    }
+
+    .technical-feedback {
+      margin-top: 10px;
+      padding: 7px;
+      border: 1px dashed #808080;
+      background: #ffffcc;
+      font-size: 12px;
+    }
+
+    .technical-meta-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #555555;
+    }
+
+    .hidden {
+      display: none;
+    }
+
     @media (max-width: 760px) {
       .layout,
       .layout tbody,
@@ -836,6 +923,19 @@
               </p>
             </div>
           </div>
+
+          <div class="window" id="technical-menu-window">
+            <!-- technical-menu-anchor: dynamic technical subpages card injected by static script -->
+            <div class="window-title" id="technical-title-bar">technical_hub.nav</div>
+            <div class="window-body">
+              <h2 class="section-title" id="technical-title">Notas técnicas da minha jornada</h2>
+              <p class="technical-menu-intro" id="technical-menu-intro">Aqui compartilho, de forma prática, experiências reais de arquitetura, decisões técnicas e ferramentas que fazem parte do meu dia a dia profissional.</p>
+              <ul class="technical-list" id="technical-menu-list"></ul>
+              <p class="technical-meta-note hidden" id="technical-menu-empty">Nenhuma subpágina técnica disponível no momento.</p>
+              <p class="technical-meta-note hidden" id="technical-menu-single-note">Apenas um item publicado no momento. Novos tópicos serão adicionados em breve.</p>
+              <div class="technical-feedback hidden" id="technical-menu-feedback" role="status" aria-live="polite"></div>
+            </div>
+          </div>
         </td>
       </tr>
     </table>
@@ -855,7 +955,7 @@
   <script>
     const fortunes = [
       {
-        pt: "Grandes sistemas sao construidos\\numa decisao clara de cada vez.",
+        pt: "Grandes sistemas são construidos\\numa decisao clara de cada vez.",
         en: "Great systems are built\\none clear decision at a time."
       },
       {
@@ -863,11 +963,11 @@
         en: "Lead with architecture,\\nbut never lose the human layer."
       },
       {
-        pt: "A complexidade diminui quando\\nestrategia encontra execucao.",
+        pt: "A complexidade diminui quando\\nestrategia encontra execução.",
         en: "Complexity fades when\\nstrategy meets execution."
       },
       {
-        pt: "Codigo e temporario.\\nClareza e legado.",
+        pt: "Código e temporario.\\nClareza e legado.",
         en: "Code is temporary.\\nClarity is legacy."
       }
     ];
@@ -887,13 +987,13 @@
         quickLaunchTitle: "quick launch",
         sysSpecsTitle: "sys specs",
         osLabel: "OS:",
-        osText: "pragmatismo em nivel enterprise",
+        osText: "pragmatismo em nível enterprise",
         kernelLabel: "Kernel:",
-        kernelText: "arquitetura + lideranca tecnica",
+        kernelText: "arquitetura + liderança técnica",
         uptimeLabel: "Uptime:",
         uptimeText: "~20 anos entregando software",
         compilerLabel: "Compiler:",
-        compilerText: "visao de produto, engenharia e execucao",
+        compilerText: "visão de produto, engenharia e execução",
         readmeTitle: "README.NFO",
         heroRole: "Principal Software Architect · Software Architecture Leader · IoT · Cloud Platforms",
         heroDescription: "Engenheiro de Bioprocessos e Biotecnologia pela <strong>UFPR</strong>, com pós-graduação em <strong>MBA em Gestão de Projetos</strong>. Aproximadamente 20 anos de experiência em desenvolvimento de software, já atuou com grandes monólitos em servidores corporativos, arquitetura SOA e microsserviços modernos na nuvem. Atua hoje como <strong>Coordenador de Arquitetura de Software</strong> na multinacional chinesa <strong>Hexing Group</strong>, com foco em IoT aplicado a carregadores de veículos elétricos e mobilidade.",
@@ -947,6 +1047,14 @@
         stackMessaging: "Mensageria & Eventos",
         stackIot: "IoT & Protocolos",
         stackObservability: "Observabilidade & Monitoramento",
+        technicalTitleBar: "technical_hub.nav",
+        technicalTitle: "Notas técnicas da minha jornada",
+        technicalMenuIntro: "Aqui compartilho, de forma prática, experiências reais de arquitetura, decisões técnicas e ferramentas que fazem parte do meu dia a dia profissional.",
+        technicalMenuEmpty: "Nenhuma subpágina técnica disponível no momento.",
+        technicalMenuSingleNote: "Apenas um item publicado no momento. Novos tópicos serão adicionados em breve.",
+        technicalMenuPathHint: "Destino:",
+        technicalUnavailablePrefix: "Indisponível:",
+        technicalUnavailableMessage: "essa subpágina ainda não foi publicada.",
         contactTitleBar: "contact.irc",
         contactTitle: "Canal de contato",
         contactText: "Para conversas sobre arquitetura, liderança técnica e oportunidades:",
@@ -1026,6 +1134,14 @@
         stackMessaging: "Messaging & Events",
         stackIot: "IoT & Protocols",
         stackObservability: "Observability & Monitoring",
+        technicalTitleBar: "technical_hub.nav",
+        technicalTitle: "Technical subpages",
+        technicalMenuIntro: "Access deep technical details about hands-on experience, architecture, and day-to-day tooling.",
+        technicalMenuEmpty: "No technical subpages are available right now.",
+        technicalMenuSingleNote: "Only one item is published right now. More topics will be added soon.",
+        technicalMenuPathHint: "Target:",
+        technicalUnavailablePrefix: "Unavailable:",
+        technicalUnavailableMessage: "this subpage has not been published yet.",
         contactTitleBar: "contact.irc",
         contactTitle: "Contact channel",
         contactText: "For conversations about architecture, technical leadership and opportunities:",
@@ -1071,12 +1187,148 @@
 
     let currentLanguage = "pt";
 
+    const technicalMenuItems = [
+      {
+        id: "windows-wsl-stack",
+        order: 1,
+        status: "published",
+        href: "/technical/windows-wsl-stack",
+        labels: {
+          pt: "Ambiente de Desenvolvimento Windows + WSL",
+          en: "Windows + WSL Development Environment"
+        },
+        descriptions: {
+          pt: "Contexto dual boot, evolução para WSL, fluxo atual e comandos Linux essenciais.",
+          en: "Dual-boot background, WSL transition, current workflow, and essential Linux commands."
+        }
+      },
+      {
+        id: "enterprise-architecture",
+        order: 2,
+        status: "published",
+        href: "/technical/enterprise-architecture",
+        labels: {
+          pt: "Arquitetura Enterprise de Referência",
+          en: "Enterprise Reference Architecture"
+        },
+        descriptions: {
+          pt: "Visão padrão de frontend, BFF, gateway, identidade, backend, mensageria e dados.",
+          en: "Default architecture view with frontend, BFF, gateway, identity, backend, messaging, and data."
+        }
+      },
+      {
+        id: "docs-and-playbooks",
+        order: 3,
+        status: "unavailable",
+        href: "",
+        labels: {
+          pt: "Documentos e Playbooks Técnicos",
+          en: "Technical Documents and Playbooks"
+        },
+        descriptions: {
+          pt: "Guias operacionais, checklists e modelos práticos em curadoria.",
+          en: "Operational guides, checklists, and practical templates under curation."
+        }
+      }
+    ];
+
     function setText(id, value) {
       document.getElementById(id).textContent = value;
     }
 
     function setHtml(id, value) {
       document.getElementById(id).innerHTML = value;
+    }
+
+    function setupTechnicalMenuKeyboard(menuEl) {
+      menuEl.addEventListener("keydown", (event) => {
+        const keys = ["ArrowDown", "ArrowUp", "Home", "End"];
+        if (!keys.includes(event.key)) return;
+
+        const focusables = [...menuEl.querySelectorAll(".technical-link:not([disabled])")];
+        if (!focusables.length) return;
+
+        const currentIndex = focusables.indexOf(document.activeElement);
+        if (currentIndex < 0) return;
+
+        let nextIndex = currentIndex;
+        if (event.key === "ArrowDown") nextIndex = (currentIndex + 1) % focusables.length;
+        if (event.key === "ArrowUp") nextIndex = (currentIndex - 1 + focusables.length) % focusables.length;
+        if (event.key === "Home") nextIndex = 0;
+        if (event.key === "End") nextIndex = focusables.length - 1;
+
+        event.preventDefault();
+        focusables[nextIndex].focus();
+      });
+    }
+
+    function renderTechnicalMenu(language) {
+      const copy = translations[language];
+      const listEl = document.getElementById("technical-menu-list");
+      const emptyEl = document.getElementById("technical-menu-empty");
+      const singleEl = document.getElementById("technical-menu-single-note");
+      const feedbackEl = document.getElementById("technical-menu-feedback");
+
+      feedbackEl.textContent = "";
+      feedbackEl.classList.add("hidden");
+      listEl.innerHTML = "";
+
+      const sorted = [...technicalMenuItems].sort((a, b) => a.order - b.order);
+      if (!sorted.length) {
+        emptyEl.classList.remove("hidden");
+        singleEl.classList.add("hidden");
+        return;
+      }
+
+      emptyEl.classList.add("hidden");
+
+      const publishedCount = sorted.filter((item) => item.status === "published").length;
+      if (publishedCount === 1) {
+        singleEl.classList.remove("hidden");
+      } else {
+        singleEl.classList.add("hidden");
+      }
+
+      sorted.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "technical-item";
+
+        const label = item.labels[language];
+        const desc = item.descriptions[language];
+
+        if (item.status === "published") {
+          const link = document.createElement("a");
+          link.className = "technical-link";
+          link.href = item.href;
+          link.setAttribute("aria-label", label);
+          link.innerHTML = `
+            <span class="technical-item-title">${label}</span>
+            <span class="technical-item-desc">${desc}</span>
+            <span class="technical-item-hint">${copy.technicalMenuPathHint} ${item.href}</span>
+          `;
+          li.appendChild(link);
+        } else {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "technical-link unavailable";
+          btn.setAttribute("aria-disabled", "true");
+          btn.setAttribute("aria-label", `${copy.technicalUnavailablePrefix} ${label}`);
+          btn.innerHTML = `
+            <span class="technical-item-title">${label}</span>
+            <span class="technical-item-desc">${desc}</span>
+            <span class="technical-item-hint">${copy.technicalUnavailablePrefix} ${copy.technicalUnavailableMessage}</span>
+          `;
+          btn.addEventListener("click", () => {
+            feedbackEl.textContent = `${copy.technicalUnavailablePrefix} ${label} - ${copy.technicalUnavailableMessage}`;
+            feedbackEl.classList.remove("hidden");
+          });
+          li.appendChild(btn);
+        }
+
+        listEl.appendChild(li);
+      });
+
+      setupTechnicalMenuKeyboard(listEl);
     }
 
     function applyLanguage(language) {
@@ -1158,6 +1410,12 @@
       setText("stack-label-messaging", copy.stackMessaging);
       setText("stack-label-iot", copy.stackIot);
       setText("stack-label-observability", copy.stackObservability);
+      setText("technical-title-bar", copy.technicalTitleBar);
+      setText("technical-title", copy.technicalTitle);
+      setText("technical-menu-intro", copy.technicalMenuIntro);
+      setText("technical-menu-empty", copy.technicalMenuEmpty);
+      setText("technical-menu-single-note", copy.technicalMenuSingleNote);
+      renderTechnicalMenu(language);
       setText("contact-title-bar", copy.contactTitleBar);
       setText("contact-title", copy.contactTitle);
       setHtml("contact-text", copy.contactText);
@@ -1165,6 +1423,12 @@
 
       document.getElementById("lang-pt").classList.toggle("active", language === "pt");
       document.getElementById("lang-en").classList.toggle("active", language === "en");
+
+      try {
+        localStorage.setItem("site-lang", language);
+      } catch (error) {
+        // Ignore storage errors in restricted environments.
+      }
 
       currentLanguage = language;
       renderFortune(currentFortune);
@@ -1232,6 +1496,16 @@
     }
 
     let currentFortune = 0;
+
+    try {
+      const savedLanguage = localStorage.getItem("site-lang");
+      if (savedLanguage === "pt" || savedLanguage === "en") {
+        currentLanguage = savedLanguage;
+      }
+    } catch (error) {
+      // Ignore storage errors in restricted environments.
+    }
+
     applyLanguage(currentLanguage);
 
     document.getElementById("fortune-button").addEventListener("click", () => {

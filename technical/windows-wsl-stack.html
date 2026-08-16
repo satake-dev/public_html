@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows + WSL :: technical notes</title>
+  <meta name="description" content="Ambiente de desenvolvimento Windows + WSL, com contexto histórico de dual boot e fluxo Linux moderno.">
+  <style>
+    :root {
+      --bg: #001a66;
+      --panel: #c0c0c0;
+      --panel-dark: #808080;
+      --panel-light: #ffffff;
+      --text: #000000;
+      --accent: #ffff66;
+      --green: #00ff66;
+      --blue: #000080;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+      color: var(--text);
+      font-family: "Verdana", "Arial", sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(980px, calc(100% - 24px));
+      margin: 18px auto 28px;
+      border: 3px solid var(--panel-light);
+      border-right-color: var(--panel-dark);
+      border-bottom-color: var(--panel-dark);
+      background: var(--panel);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .topline {
+      background: #000080;
+      color: #ffffff;
+      padding: 6px 10px;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .shellline {
+      background: #000000;
+      color: var(--green);
+      padding: 6px 10px;
+      font-family: "Courier New", monospace;
+      border-top: 2px solid #ffffff;
+      border-bottom: 2px solid #808080;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    .content {
+      padding: 12px;
+    }
+
+    .window {
+      margin-bottom: 12px;
+      border: 2px solid var(--panel-light);
+      border-right-color: var(--panel-dark);
+      border-bottom-color: var(--panel-dark);
+      background: #efefef;
+    }
+
+    .window-title {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #ffffff;
+      padding: 4px 6px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .window-body {
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .lang-button {
+      border: 2px outset #cccccc;
+      background: #c0c0c0;
+      color: #000000;
+      padding: 2px 6px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lang-button.active {
+      background: #000080;
+      color: #ffffff;
+      border-style: inset;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .note {
+      padding: 8px;
+      background: #ffffcc;
+      border: 1px dashed #666666;
+      margin: 10px 0;
+    }
+
+    .section-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .section-list li {
+      margin-bottom: 6px;
+    }
+
+    .code-block {
+      margin: 8px 0;
+      background: #000000;
+      color: var(--green);
+      padding: 8px;
+      font-family: "Courier New", monospace;
+      border: 2px inset #555555;
+      overflow: auto;
+      white-space: pre;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .photo-strip {
+      margin: 10px 0 14px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    .photo-card {
+      margin: 0;
+      border: 2px solid #bdbdbd;
+      border-right-color: #6f6f6f;
+      border-bottom-color: #6f6f6f;
+      background: #f4f4f4;
+      padding: 6px;
+    }
+
+    .photo-frame {
+      margin: 0;
+      border: 2px inset #555555;
+      background: #000000;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #cfcfcf;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 0;
+    }
+
+    .photo-placeholder {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .photo-frame.has-image .photo-placeholder {
+      display: none;
+    }
+
+    .photo-caption {
+      margin: 8px 2px 2px;
+      font-size: 12px;
+      color: #2a2a2a;
+    }
+
+    .photo-strip-intro {
+      margin: 8px 0;
+      font-size: 13px;
+    }
+
+    .backlink {
+      margin-top: 10px;
+      display: inline-block;
+      font-weight: bold;
+      color: #0000cc;
+    }
+
+    .footerline {
+      background: #000080;
+      color: #ffffff;
+      padding: 6px 10px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      h1 { font-size: 24px; }
+      h2 { font-size: 18px; }
+    }
+
+    @media (min-width: 900px) {
+      .photo-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .photo-card.full {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topline" id="topline">https://www.satake.me/~thiago/technical/windows-wsl-stack</div>
+    <div class="shellline" id="shellline">thiago@satake.me:~$ cat windows-wsl-stack.md</div>
+
+    <div class="content">
+      <div class="window">
+        <div class="window-title" id="title-bar">technical/page/windows-wsl-stack</div>
+        <div class="window-body">
+          <div class="lang-switch">
+            <button class="lang-button active" type="button" id="lang-pt" aria-label="Mudar idioma para português">PT</button>
+            <button class="lang-button" type="button" id="lang-en" aria-label="Switch language to English">EN</button>
+          </div>
+
+          <h1 id="page-title">Ambiente de Desenvolvimento: Windows + WSL</h1>
+          <p id="intro-text">Este é um exemplo de ambiente Windows + WSL para manter fluxo Linux no desenvolvimento, sem abrir mão da interface principal no Windows.</p>
+
+          <div class="note" id="transition-note">
+            Por muitos anos, Linux em dual boot com Windows foi uma abordagem comum para desenvolvimento. Com a maturidade do WSL, tornou-se possível consolidar uma rotina mais fluida: Linux para build e execução, Windows para produtividade de desktop.
+          </div>
+
+          <h2 id="history-title">1) Contexto histórico: dual boot por muitos anos</h2>
+          <p id="history-text">Durante boa parte da carreira, a forma mais confiável para desenvolvimento Linux era manter uma partição dedicada e alternar entre sistemas. Funcionava, mas trazia custo operacional: reinícios frequentes, isolamento de arquivos e maior atrito para tarefas rápidas.</p>
+
+          <h2 id="wsl-title">2) Evolução para WSL como padrão</h2>
+          <p id="wsl-text">Com a evolução do WSL em compatibilidade e performance, é possível manter shell, ferramentas de build e automações no Linux, aproveitando no Windows os recursos que favorecem documentação, navegação e multitarefa.</p>
+
+          <p class="photo-strip-intro" id="photo-strip-intro">Capturas reais de referência do VS Code interagindo com WSL em um setup típico:</p>
+          <div class="photo-strip" aria-label="Galeria de imagens do ambiente Windows e WSL">
+            <figure class="photo-card">
+              <div class="photo-frame" id="photo-frame-1">
+                <img id="photo-img-1" src="../assets/technical/windows-wsl/vscode-wsl-code-command.png" alt="Comando code executado no terminal WSL" loading="lazy">
+                <p class="photo-placeholder" id="photo-placeholder-1">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-code-command.png</p>
+              </div>
+              <figcaption class="photo-caption" id="photo-caption-1">Terminal WSL mostrando a abertura do VS Code com o comando code no contexto Linux.</figcaption>
+            </figure>
+
+            <figure class="photo-card">
+              <div class="photo-frame" id="photo-frame-2">
+                <img id="photo-img-2" src="../assets/technical/windows-wsl/vscode-wsl-remote-indicator.png" alt="Indicador remoto do VS Code em WSL" loading="lazy">
+                <p class="photo-placeholder" id="photo-placeholder-2">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-remote-indicator.png</p>
+              </div>
+              <figcaption class="photo-caption" id="photo-caption-2">Indicador de sessão remota no VS Code confirmando execução ativa em WSL.</figcaption>
+            </figure>
+
+            <figure class="photo-card full">
+              <div class="photo-frame" id="photo-frame-3">
+                <img id="photo-img-3" src="../assets/technical/windows-wsl/vscode-wsl-extensions-view.png" alt="Lista de extensões do VS Code para WSL" loading="lazy">
+                <p class="photo-placeholder" id="photo-placeholder-3">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-extensions-view.png</p>
+              </div>
+              <figcaption class="photo-caption" id="photo-caption-3">Visão de extensões no VS Code destacando componentes instalados para uso com WSL.</figcaption>
+            </figure>
+          </div>
+
+          <h2 id="workflow-title">3) Fluxo atual de trabalho</h2>
+          <ul class="section-list" id="workflow-list">
+            <li>Código e automações rodam no ambiente Linux (WSL).</li>
+            <li>Edição e navegação acontecem com interface principal no Windows.</li>
+            <li>Repositório e scripts seguem padrão Linux para reduzir variação entre ambientes.</li>
+            <li>Validações finais são feitas em browser desktop e mobile antes de publicar.</li>
+          </ul>
+
+          <h2 id="commands-title">4) Referências Linux práticas</h2>
+          <p id="commands-intro">Comandos comuns em um setup para operação em cloud, acesso a Kubernetes, Docker e build de aplicações Java e Angular:</p>
+          <div class="code-block" aria-label="Comandos CLI para cloud, Kubernetes e build" id="commands-block"># Linux base
+pwd
+ls -la
+grep -R "TODO" .
+chmod +x scripts/deploy.sh
+
+# AWS CLI
+aws configure
+aws sts get-caller-identity
+aws s3 ls
+aws eks update-kubeconfig --region us-east-1 --name <cluster-name>
+
+# Azure CLI
+az login
+az account show --output table
+az aks get-credentials --resource-group <rg> --name <aks-name> --overwrite-existing
+
+# OCI CLI
+oci setup config
+oci iam region list
+oci ce cluster list --compartment-id <compartment-ocid>
+
+# Kubernetes (kubectl)
+kubectl config get-contexts
+kubectl config use-context <context-name>
+kubectl get nodes
+kubectl get pods -n <namespace>
+kubectl logs -f <pod-name> -n <namespace>
+kubectl describe pod <pod-name> -n <namespace>
+
+# Docker
+docker version
+docker ps -a
+docker build -t my-app:local .
+docker run --rm -p 8080:8080 my-app:local
+docker compose up -d
+
+# Build Java (Maven/Gradle)
+mvn clean verify
+mvn spring-boot:run
+./gradlew clean build
+./gradlew bootRun
+
+# Node.js (runtime/tooling)
+node -v
+npm -v
+npm ci
+npm outdated
+npm audit --audit-level=high
+npm run dev
+npm run build
+
+# Frontend Angular
+npm ci
+npm run lint
+npm run test
+npx ng build --configuration production
+npx ng serve --host 0.0.0.0 --port 4200</div>
+
+          <h2 id="vscode-title">5) Como abrir o VS Code no WSL</h2>
+          <p id="vscode-intro">É possível abrir o VS Code diretamente pelo ambiente WSL, mantendo editor, terminal e arquivos no mesmo contexto Linux do projeto. Nesse modelo, o comando <strong>code .</strong> inicia a sessão já conectada à distribuição, e o status no rodapé do editor indica que a execução está em WSL. Quando esse comando não está disponível, normalmente basta concluir a instalação do VS Code no Windows com a extensão WSL (Remote - WSL) para habilitar esse fluxo.</p>
+
+          <h2 id="vscode-why-title">Por que isso é fundamental</h2>
+          <ul class="section-list" id="vscode-why-list">
+            <li>Consistência de ambiente: desenvolvimento, build e execução acontecem no mesmo Linux.</li>
+            <li>Menos erros de path e permissões: scripts, git, Docker e kubectl seguem o mesmo padrão Unix.</li>
+            <li>Mais performance de I/O: editar no filesystem Linux evita atritos comuns de integração.</li>
+            <li>Fluxo cloud-native real: AWS, Azure, OCI e Kubernetes ficam no contexto correto desde o início.</li>
+          </ul>
+
+          <h2 id="limits-title">6) Boas práticas e limites</h2>
+          <ul class="section-list" id="limits-list">
+            <li>Uso WSL para desenvolvimento, automação e consistência de ambiente.</li>
+            <li>Uso Windows nativo para ferramentas de escritório e comunicação.</li>
+            <li>Evito misturar caminhos e permissões sem critério entre os dois mundos.</li>
+            <li>Mantenho scripts e processos padronizados para facilitar onboarding e reprodução.</li>
+          </ul>
+
+          <a class="backlink" href="../index.html" id="back-link" aria-label="Voltar para a página principal">&laquo; voltar para página principal</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footerline" id="footerline">linux workflow + windows desktop :: old-school style, modern delivery</div>
+  </div>
+
+  <script>
+    const copy = {
+      pt: {
+        pageTitle: "Windows + WSL :: notas técnicas",
+        shellline: "thiago@satake.me:~$ cat windows-wsl-stack.md",
+        titleBar: "technical/page/windows-wsl-stack",
+        pageTitleText: "Ambiente de Desenvolvimento: Windows + WSL",
+        introText: "Este é um exemplo de ambiente Windows + WSL para manter fluxo Linux no desenvolvimento, sem abrir mão da interface principal no Windows.",
+        transitionNote: "Por muitos anos, Linux em dual boot com Windows foi uma abordagem comum para desenvolvimento. Com a maturidade do WSL, tornou-se possível consolidar uma rotina mais fluida: Linux para build e execução, Windows para produtividade de desktop.",
+        historyTitle: "1) Contexto histórico: dual boot por muitos anos",
+        historyText: "Durante boa parte da carreira, a forma mais confiável para desenvolvimento Linux era manter uma partição dedicada e alternar entre sistemas. Funcionava, mas trazia custo operacional: reinícios frequentes, isolamento de arquivos e maior atrito para tarefas rápidas.",
+        wslTitle: "2) Evolução para WSL como padrão",
+        wslText: "Com a evolução do WSL em compatibilidade e performance, é possível manter shell, ferramentas de build e automações no Linux, aproveitando no Windows os recursos que favorecem documentação, navegação e multitarefa.",
+        photoStripIntro: "Capturas reais de referência do VS Code interagindo com WSL em um setup típico:",
+        photoCaption1: "Terminal WSL mostrando a abertura do VS Code com o comando code no contexto Linux.",
+        photoCaption2: "Indicador de sessão remota no VS Code confirmando execução ativa em WSL.",
+        photoCaption3: "Visão de extensões no VS Code destacando componentes instalados para uso com WSL.",
+        photoPlaceholder1: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-code-command.png",
+        photoPlaceholder2: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-remote-indicator.png",
+        photoPlaceholder3: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-extensions-view.png",
+        photoAlt1: "Comando code executado no terminal WSL",
+        photoAlt2: "Indicador remoto do VS Code em WSL",
+        photoAlt3: "Lista de extensões do VS Code para WSL",
+        workflowTitle: "3) Fluxo atual de trabalho",
+        workflowItems: [
+          "Código e automações rodam no ambiente Linux (WSL).",
+          "Edição e navegação acontecem com interface principal no Windows.",
+          "Repositório e scripts seguem padrão Linux para reduzir variação entre ambientes.",
+          "Validações finais são feitas em browser desktop e mobile antes de publicar."
+        ],
+        commandsTitle: "4) Referências Linux práticas",
+        commandsIntro: "Comandos comuns em um setup para operação em cloud, acesso a Kubernetes, Docker e build de aplicações Java e Angular:",
+        vscodeTitle: "5) Como abrir o VS Code no WSL",
+        vscodeIntro: "É possível abrir o VS Code diretamente pelo ambiente WSL, mantendo editor, terminal e arquivos no mesmo contexto Linux do projeto. Nesse modelo, o comando code . inicia a sessão já conectada à distribuição, e o status no rodapé do editor indica que a execução está em WSL. Quando esse comando não está disponível, normalmente basta concluir a instalação do VS Code no Windows com a extensão WSL (Remote - WSL) para habilitar esse fluxo.",
+        vscodeWhyTitle: "Por que isso é fundamental",
+        vscodeWhyItems: [
+          "Consistência de ambiente: desenvolvimento, build e execução acontecem no mesmo Linux.",
+          "Menos erros de path e permissões: scripts, git, Docker e kubectl seguem o mesmo padrão Unix.",
+          "Mais performance de I/O: editar no filesystem Linux evita atritos comuns de integração.",
+          "Fluxo cloud-native real: AWS, Azure, OCI e Kubernetes ficam no contexto correto desde o início."
+        ],
+        limitsTitle: "6) Boas práticas e limites",
+        limitsItems: [
+          "Uso WSL para desenvolvimento, automação e consistência de ambiente.",
+          "Uso Windows nativo para ferramentas de escritório e comunicação.",
+          "Evito misturar caminhos e permissões sem critério entre os dois mundos.",
+          "Mantenho scripts e processos padronizados para facilitar onboarding e reprodução."
+        ],
+        backText: "« voltar para página principal",
+        footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
+      },
+      en: {
+        pageTitle: "Windows + WSL :: technical notes",
+        shellline: "thiago@satake.me:~$ cat windows-wsl-stack.md",
+        titleBar: "technical/page/windows-wsl-stack",
+        pageTitleText: "Development Environment: Windows + WSL",
+        introText: "This is a reference Windows + WSL setup that keeps a Linux-first development workflow without giving up a Windows-first desktop experience.",
+        transitionNote: "For many years, Linux dual boot with Windows was a common development approach. As WSL matured, it became possible to consolidate a smoother routine: Linux for build and runtime, Windows for desktop productivity.",
+        historyTitle: "1) Historical context: years of dual boot",
+        historyText: "For a large part of my career, the most reliable Linux development setup was a dedicated partition with constant switching between systems. It worked, but with operational cost: frequent reboots, isolated files, and extra friction for quick tasks.",
+        wslTitle: "2) Migration to WSL as default",
+        wslText: "As WSL improved in compatibility and performance, it became possible to keep shell, build tooling, and automation on Linux while using Windows resources for documentation, browsing, and multitasking.",
+        photoStripIntro: "Real reference captures of VS Code interacting with WSL in a typical setup:",
+        photoCaption1: "WSL terminal showing VS Code being launched with the code command in Linux context.",
+        photoCaption2: "Remote session indicator in VS Code confirming active execution in WSL.",
+        photoCaption3: "Extensions view in VS Code highlighting installed components for WSL usage.",
+        photoPlaceholder1: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-wsl-code-command.png",
+        photoPlaceholder2: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-wsl-remote-indicator.png",
+        photoPlaceholder3: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-wsl-extensions-view.png",
+        photoAlt1: "code command executed in WSL terminal",
+        photoAlt2: "VS Code remote indicator in WSL",
+        photoAlt3: "VS Code extensions list for WSL",
+        workflowTitle: "3) Current workflow",
+        workflowItems: [
+          "Code and automation run on the Linux side (WSL).",
+          "Editing and navigation happen with a Windows-first interface.",
+          "Repositories and scripts stay Linux-oriented to reduce environment drift.",
+          "Final validation happens on desktop and mobile browsers before publishing."
+        ],
+        commandsTitle: "4) Practical Linux references",
+        commandsIntro: "Common commands in a setup for cloud operations, Kubernetes access, Docker workflows, and Java/Angular builds:",
+        vscodeTitle: "5) How I open VS Code in WSL",
+        vscodeIntro: "It is possible to open VS Code directly from WSL, keeping editor, terminal, and project files in the same Linux execution context. In this model, the code . command starts a session already attached to your distribution, and the status bar confirms WSL is active. If that command is unavailable, installing VS Code on Windows with the WSL extension (Remote - WSL) usually enables this flow.",
+        vscodeWhyTitle: "Why this is fundamental",
+        vscodeWhyItems: [
+          "Environment consistency: development, build, and runtime happen in the same Linux context.",
+          "Fewer path and permission issues: scripts, git, Docker, and kubectl follow one Unix standard.",
+          "Better I/O performance: editing directly in the Linux filesystem avoids common integration friction.",
+          "Real cloud-native flow: AWS, Azure, OCI, and Kubernetes stay in the correct execution context from day one."
+        ],
+        limitsTitle: "6) Good practices and boundaries",
+        limitsItems: [
+          "Use WSL for development, automation, and environment consistency.",
+          "Use native Windows for office and communication tooling.",
+          "Avoid mixing paths and permissions carelessly across both worlds.",
+          "Keep scripts and routines standardized for onboarding and reproducibility."
+        ],
+        backText: "« back to main page",
+        footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
+      }
+    };
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function setImageCopy(imageId, frameId, placeholderId, captionId, altText, placeholderText, captionText) {
+      const img = document.getElementById(imageId);
+      const frame = document.getElementById(frameId);
+      const placeholder = document.getElementById(placeholderId);
+      const caption = document.getElementById(captionId);
+
+      img.alt = altText;
+      placeholder.textContent = placeholderText;
+      caption.textContent = captionText;
+
+      if (img.complete && img.naturalWidth > 0) {
+        frame.classList.add("has-image");
+      } else {
+        frame.classList.remove("has-image");
+      }
+    }
+
+    function renderList(id, values) {
+      const list = document.getElementById(id);
+      list.innerHTML = "";
+      values.forEach((value) => {
+        const li = document.createElement("li");
+        li.textContent = value;
+        list.appendChild(li);
+      });
+    }
+
+    function applyLanguage(lang) {
+      const t = copy[lang];
+      document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+      document.title = t.pageTitle;
+      setText("shellline", t.shellline);
+      setText("title-bar", t.titleBar);
+      setText("page-title", t.pageTitleText);
+      setText("intro-text", t.introText);
+      setText("transition-note", t.transitionNote);
+      setText("history-title", t.historyTitle);
+      setText("history-text", t.historyText);
+      setText("wsl-title", t.wslTitle);
+      setText("wsl-text", t.wslText);
+      setText("photo-strip-intro", t.photoStripIntro);
+      setText("workflow-title", t.workflowTitle);
+      setText("commands-title", t.commandsTitle);
+      setText("commands-intro", t.commandsIntro);
+      setText("vscode-title", t.vscodeTitle);
+      setText("vscode-intro", t.vscodeIntro);
+      setText("vscode-why-title", t.vscodeWhyTitle);
+      setText("limits-title", t.limitsTitle);
+      setText("back-link", t.backText);
+      setText("footerline", t.footerline);
+      renderList("workflow-list", t.workflowItems);
+      setImageCopy("photo-img-1", "photo-frame-1", "photo-placeholder-1", "photo-caption-1", t.photoAlt1, t.photoPlaceholder1, t.photoCaption1);
+      setImageCopy("photo-img-2", "photo-frame-2", "photo-placeholder-2", "photo-caption-2", t.photoAlt2, t.photoPlaceholder2, t.photoCaption2);
+      setImageCopy("photo-img-3", "photo-frame-3", "photo-placeholder-3", "photo-caption-3", t.photoAlt3, t.photoPlaceholder3, t.photoCaption3);
+      renderList("vscode-why-list", t.vscodeWhyItems);
+      renderList("limits-list", t.limitsItems);
+
+      document.getElementById("lang-pt").classList.toggle("active", lang === "pt");
+      document.getElementById("lang-en").classList.toggle("active", lang === "en");
+
+      try {
+        localStorage.setItem("site-lang", lang);
+      } catch (error) {
+        // Ignore storage errors in restricted environments.
+      }
+    }
+
+    const initialLang = (() => {
+      try {
+        const saved = localStorage.getItem("site-lang");
+        if (saved === "pt" || saved === "en") return saved;
+      } catch (error) {
+        // Ignore storage errors.
+      }
+      return "pt";
+    })();
+
+    ["photo-img-1", "photo-img-2", "photo-img-3"].forEach((id) => {
+      const img = document.getElementById(id);
+      const frame = document.getElementById(id.replace("photo-img", "photo-frame"));
+      img.addEventListener("load", () => frame.classList.add("has-image"));
+      img.addEventListener("error", () => frame.classList.remove("has-image"));
+    });
+
+    applyLanguage(initialLang);
+    document.getElementById("lang-pt").addEventListener("click", () => applyLanguage("pt"));
+    document.getElementById("lang-en").addEventListener("click", () => applyLanguage("en"));
+  </script>
+</body>
+</html>
