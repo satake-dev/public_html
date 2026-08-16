@@ -345,17 +345,17 @@
           </div>
 
           <h1 id="page-title">Ambiente de Desenvolvimento: Windows + WSL</h1>
-          <p id="intro-text">Este é um exemplo de ambiente Windows + WSL para manter fluxo Linux no desenvolvimento, sem abrir mão da interface principal no Windows.</p>
+          <p id="intro-text">Por muito tempo, trabalhar com Windows e Linux na mesma máquina era quase um esporte: abrir um sistema, perceber que faltava uma ferramenta, reiniciar, abrir o outro, repetir. O dual boot salvou muita gente nessa fase e teve seu mérito, porque permitia usar Windows para a rotina de escritório e Linux para build, automação e ambiente parecido com produção. Só que havia um preço: quebra de foco, troca de contexto e aquela sensação de que metade da energia ia para organizar o ambiente, não para resolver o problema. A virada começou em 2016 com o WSL 1 e ficou madura em 2019 com o WSL 2, trazendo kernel Linux real, mais compatibilidade e um fluxo muito mais estável. Com VS Code integrado ao WSL, Linux e Windows pararam de disputar atenção e começaram a jogar no mesmo time. No fim, a conta fecha simples: menos drama de setup, mais tempo para escrever código que importa.</p>
 
           <div class="note" id="transition-note">
-            Por muitos anos, Linux em dual boot com Windows foi uma abordagem comum para desenvolvimento. Com a maturidade do WSL, tornou-se possível consolidar uma rotina mais fluida: Linux para build e execução, Windows para produtividade de desktop.
+            O dual boot foi o plano A durante anos. Em 2019, com o WSL 2, veio o plano melhor: Linux como base principal de desenvolvimento e execução, com o Windows apoiando o dia a dia, sem aquela ginástica de reiniciar a máquina.
           </div>
 
           <h2 id="history-title">1) Contexto histórico: dual boot por muitos anos</h2>
-          <p id="history-text">Durante boa parte da carreira, a forma mais confiável para desenvolvimento Linux era manter uma partição dedicada e alternar entre sistemas. Funcionava, mas trazia custo operacional: reinícios frequentes, isolamento de arquivos e maior atrito para tarefas rápidas.</p>
+          <p id="history-text">Durante boa parte da carreira, o caminho mais confiável era manter uma partição Linux dedicada e alternar entre sistemas. Funcionava, claro, mas cobrava pedágio: reinícios frequentes, arquivos espalhados e tarefas simples virando mini-expedições.</p>
 
           <h2 id="wsl-title">2) Evolução para WSL como padrão</h2>
-          <p id="wsl-text">Com a evolução do WSL em compatibilidade e performance, é possível manter shell, ferramentas de build e automações no Linux, aproveitando no Windows os recursos que favorecem documentação, navegação e multitarefa.</p>
+          <p id="wsl-text">Com o WSL maduro, ficou possível manter shell, build e automações no Linux sem abrir mão do conforto do Windows para documentação, navegação e multitarefa. Em vez de escolher um lado, você ganha os dois no mesmo fluxo.</p>
 
           <p class="photo-strip-intro" id="photo-strip-intro">Alguns exemplos visuais realistas de um setup Windows + WSL:</p>
           <div class="photo-strip" aria-label="Galeria de imagens do ambiente Windows e WSL">
@@ -393,7 +393,7 @@
           </ul>
 
           <h2 id="commands-title">4) Referências Linux práticas (sem drama)</h2>
-          <p id="commands-intro">Uma visão rápida dos comandos que costumam aparecer quando o terminal vira protagonista em ambientes cloud, containers e build de aplicações.</p>
+          <p id="commands-intro">Aqui está o kit de sobrevivência do terminal quando a vida real chama: cloud, containers, build e aquele diagnóstico rápido antes de qualquer deploy.</p>
           <p class="note" id="commands-summary"></p>
 
           <p class="commands-visual-intro" id="commands-visual-intro">Exemplos de comandos por grupo, com terminal em ação:</p>
@@ -472,7 +472,7 @@
           </div>
 
           <h2 id="vscode-title">5) Como abrir o VS Code no WSL</h2>
-          <p id="vscode-intro">É possível abrir o VS Code diretamente pelo ambiente WSL, mantendo editor, terminal e arquivos no mesmo contexto Linux do projeto. Nesse modelo, o comando <strong>code .</strong> inicia a sessão já conectada à distribuição, e o status no rodapé do editor indica que a execução está em WSL. Quando esse comando não está disponível, normalmente basta concluir a instalação do VS Code no Windows com a extensão WSL (Remote - WSL) para habilitar esse fluxo.</p>
+          <p id="vscode-intro">Dá para abrir o VS Code direto no WSL e manter editor, terminal e arquivos no mesmo contexto Linux do projeto. Na prática, você roda <strong>code .</strong> no terminal e pronto: o VS Code sobe conectado na distribuição. Se o comando não aparecer, normalmente basta instalar o VS Code no Windows com a extensão WSL (Remote - WSL) que tudo se acerta.</p>
 
           <h2 id="vscode-why-title">Por que isso é fundamental</h2>
           <ul class="section-list" id="vscode-why-list">
@@ -491,8 +491,8 @@
           </ul>
 
           <h2 id="clippy-title">7) Conclusão</h2>
-          <p class="clippy-story" id="clippy-intro">Durante muito tempo, desenvolver software em uma mesma máquina significava conviver com dois mundos que não se encontravam naturalmente: o Windows, necessário para a rotina corporativa, comunicação e aplicações de desktop, e o Linux, indispensável para build, automação, containers e previsibilidade de ambiente. O dual boot foi a ponte possível dessa época e, para muita gente, funcionou com mérito; era o método que permitia manter produtividade em contextos diferentes, mesmo com o custo silencioso de interromper o fluxo para reiniciar, trocar de sistema e recuperar contexto toda vez que uma tarefa atravessava fronteiras. Com a maturidade do WSL, essa história ganhou um final melhor: o Linux passou a existir dentro do Windows com consistência real, sem abandonar ferramentas de trabalho, sem a fricção da troca de sistema e sem transformar cada ajuste técnico em logística operacional. O que antes era um ritual de sobrevivência virou um fluxo contínuo de engenharia, em que a energia volta para o que realmente importa: pensar, construir e entregar software.</p>
-          <p class="clippy-speech final" id="clippy-text">Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos logística de ambiente e mais código chegando em produção.</p>
+          <p class="clippy-story" id="clippy-intro">A história foi mais ou menos assim: primeiro, a gente aprendeu a conviver com dois mundos. Windows para o dia a dia, Linux para desenvolver com previsibilidade. O dual boot segurou essa ponte por anos e foi essencial em muita fase da carreira. Só que ele sempre vinha com uma pegadinha: toda vez que o trabalho atravessava de um lado para o outro, vinha junto um reinício, uma pausa e aquela quebra de ritmo nada charmosa. Quando o WSL amadureceu, essa novela ganhou final feliz. O Linux passou a viver dentro do Windows de forma confiável, o terminal ficou no lugar certo, o editor ficou no lugar certo, e o contexto finalmente parou de fugir no meio da tarefa. O que antes era esforço para manter ambiente virou energia para construir produto.</p>
+          <p class="clippy-speech final" id="clippy-text">Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos novela de ambiente e mais código chegando em produção.</p>
 
           <a class="backlink" href="../index.html" id="back-link" aria-label="Voltar para a página principal">&laquo; voltar para página principal</a>
         </div>
@@ -509,12 +509,12 @@
         shellline: "thiago@satake.me:~$ cat windows-wsl-stack.md",
         titleBar: "technical/page/windows-wsl-stack",
         pageTitleText: "Ambiente de Desenvolvimento: Windows + WSL",
-        introText: "Este é um exemplo de ambiente Windows + WSL para manter fluxo Linux no desenvolvimento, sem abrir mão da interface principal no Windows.",
-        transitionNote: "Por muitos anos, Linux em dual boot com Windows foi uma abordagem comum para desenvolvimento. Com a maturidade do WSL, tornou-se possível consolidar uma rotina mais fluida: Linux para build e execução, Windows para produtividade de desktop.",
+        introText: "Por muito tempo, trabalhar com Windows e Linux na mesma máquina era quase um esporte: abrir um sistema, perceber que faltava uma ferramenta, reiniciar, abrir o outro, repetir. O dual boot salvou muita gente nessa fase e teve seu mérito, porque permitia usar Windows para a rotina de escritório e Linux para build, automação e ambiente parecido com produção. Só que havia um preço: quebra de foco, troca de contexto e aquela sensação de que metade da energia ia para organizar o ambiente, não para resolver o problema. A virada começou em 2016 com o WSL 1 e ficou madura em 2019 com o WSL 2, trazendo kernel Linux real, mais compatibilidade e um fluxo muito mais estável. Com VS Code integrado ao WSL, Linux e Windows pararam de disputar atenção e começaram a jogar no mesmo time. No fim, a conta fecha simples: menos drama de setup, mais tempo para escrever código que importa.",
+        transitionNote: "O dual boot foi o plano A durante anos. Em 2019, com o WSL 2, veio o plano melhor: Linux como base principal de desenvolvimento e execução, com o Windows apoiando o dia a dia, sem aquela ginástica de reiniciar a máquina.",
         historyTitle: "1) Contexto histórico: dual boot por muitos anos",
-        historyText: "Durante boa parte da carreira, a forma mais confiável para desenvolvimento Linux era manter uma partição dedicada e alternar entre sistemas. Funcionava, mas trazia custo operacional: reinícios frequentes, isolamento de arquivos e maior atrito para tarefas rápidas.",
+        historyText: "Durante boa parte da carreira, o caminho mais confiável era manter uma partição Linux dedicada e alternar entre sistemas. Funcionava, claro, mas cobrava pedágio: reinícios frequentes, arquivos espalhados e tarefas simples virando mini-expedições.",
         wslTitle: "2) Evolução para WSL como padrão",
-        wslText: "Com a evolução do WSL em compatibilidade e performance, é possível manter shell, ferramentas de build e automações no Linux, aproveitando no Windows os recursos que favorecem documentação, navegação e multitarefa.",
+        wslText: "Com o WSL maduro, ficou possível manter shell, build e automações no Linux sem abrir mão do conforto do Windows para documentação, navegação e multitarefa. Em vez de escolher um lado, você ganha os dois no mesmo fluxo.",
         photoStripIntro: "Alguns exemplos visuais realistas de um setup Windows + WSL:",
         photoCaption1: "Desktop Windows com terminal WSL aberto para navegação e execução de comandos de projeto.",
         photoCaption2: "VS Code conectado ao WSL com terminal integrado e arquivos do projeto no ambiente Linux.",
@@ -527,13 +527,13 @@
         photoAlt3: "Terminal com comandos cloud, kubectl e docker",
         workflowTitle: "3) Fluxo atual de trabalho",
         workflowItems: [
-          "Código e automações rodam no ambiente Linux (WSL).",
-          "Edição e navegação acontecem com interface principal no Windows.",
-          "Repositório e scripts seguem padrão Linux para reduzir variação entre ambientes.",
-          "Validações finais são feitas em browser desktop e mobile antes de publicar."
+          "Código, build e automações rodam no Linux (WSL), no mesmo estilo de produção.",
+          "Edição e navegação ficam no Windows com VS Code integrado ao WSL.",
+          "Repositório e scripts seguem padrão Linux para evitar o clássico funciona-na-minha-máquina.",
+          "Antes de publicar, a checagem final acontece em browser desktop e mobile."
         ],
         commandsTitle: "4) Referências Linux práticas (sem drama)",
-        commandsIntro: "Uma visão rápida dos comandos que costumam aparecer quando o terminal vira protagonista em ambientes cloud, containers e build de aplicações.",
+        commandsIntro: "Aqui está o kit de sobrevivência do terminal quando a vida real chama: cloud, containers, build e aquele diagnóstico rápido antes de qualquer deploy.",
         commandsSummary: "",
         commandsVisualIntro: "Exemplos de comandos por grupo, com terminal em ação:",
         cmdCaption1: "Linux base: navegação, permissões e inspeção rápida.",
@@ -564,24 +564,24 @@
         cmdAlt8: "Terminal com comandos Node.js",
         cmdAlt9: "Terminal com comandos Angular",
         vscodeTitle: "5) Como abrir o VS Code no WSL",
-        vscodeIntro: "É possível abrir o VS Code diretamente pelo ambiente WSL, mantendo editor, terminal e arquivos no mesmo contexto Linux do projeto. Nesse modelo, o comando code . inicia a sessão já conectada à distribuição, e o status no rodapé do editor indica que a execução está em WSL. Quando esse comando não está disponível, normalmente basta concluir a instalação do VS Code no Windows com a extensão WSL (Remote - WSL) para habilitar esse fluxo.",
+        vscodeIntro: "Dá para abrir o VS Code direto no WSL e manter editor, terminal e arquivos no mesmo contexto Linux do projeto. Na prática, você roda code . no terminal e pronto: o VS Code sobe conectado na distribuição. Se o comando não aparecer, normalmente basta instalar o VS Code no Windows com a extensão WSL (Remote - WSL) que tudo se acerta.",
         vscodeWhyTitle: "Por que isso é fundamental",
         vscodeWhyItems: [
-          "Consistência de ambiente: desenvolvimento, build e execução acontecem no mesmo Linux.",
-          "Menos erros de path e permissões: scripts, git, Docker e kubectl seguem o mesmo padrão Unix.",
-          "Mais performance de I/O: editar no filesystem Linux evita atritos comuns de integração.",
-          "Fluxo cloud-native real: AWS, Azure, OCI e Kubernetes ficam no contexto correto desde o início."
+          "Mesmo ambiente do começo ao fim: desenvolvimento, build e execução no mesmo Linux.",
+          "Menos susto com path e permissão: scripts, git, Docker e kubectl falam a mesma lingua.",
+          "Edição mais fluida no filesystem Linux, sem atritos desnecessários.",
+          "Fluxo cloud-native de verdade: AWS, Azure, OCI e Kubernetes no contexto certo desde o primeiro comando."
         ],
         limitsTitle: "6) Boas práticas e limites",
         limitsItems: [
-          "Uso WSL para desenvolvimento, automação e consistência de ambiente.",
-          "Uso Windows nativo para ferramentas de escritório e comunicação.",
-          "Evito misturar caminhos e permissões sem critério entre os dois mundos.",
-          "Mantenho scripts e processos padronizados para facilitar onboarding e reprodução."
+          "WSL para desenvolver e automatizar com previsibilidade.",
+          "Windows nativo para produtividade, comunicação e ferramentas de trabalho diário.",
+          "Nada de misturar caminho e permissão sem pensar, porque essa conta sempre chega.",
+          "Scripts e processos padronizados para onboarding simples e reprodução sem dor."
         ],
         clippyTitle: "7) Conclusão",
-        clippyIntro: "Durante muito tempo, desenvolver software em uma mesma máquina significava conviver com dois mundos que não se encontravam naturalmente: o Windows, necessário para a rotina corporativa, comunicação e aplicações de desktop, e o Linux, indispensável para build, automação, containers e previsibilidade de ambiente. O dual boot foi a ponte possível dessa época e, para muita gente, funcionou com mérito; era o método que permitia manter produtividade em contextos diferentes, mesmo com o custo silencioso de interromper o fluxo para reiniciar, trocar de sistema e recuperar contexto toda vez que uma tarefa atravessava fronteiras. Com a maturidade do WSL, essa história ganhou um final melhor: o Linux passou a existir dentro do Windows com consistência real, sem abandonar ferramentas de trabalho, sem a fricção da troca de sistema e sem transformar cada ajuste técnico em logística operacional. O que antes era um ritual de sobrevivência virou um fluxo contínuo de engenharia, em que a energia volta para o que realmente importa: pensar, construir e entregar software.",
-        clippyText: "Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos logística de ambiente e mais código chegando em produção.",
+        clippyIntro: "A história foi mais ou menos assim: primeiro, a gente aprendeu a conviver com dois mundos. Windows para o dia a dia, Linux para desenvolver com previsibilidade. O dual boot segurou essa ponte por anos e foi essencial em muita fase da carreira. Só que ele sempre vinha com uma pegadinha: toda vez que o trabalho atravessava de um lado para o outro, vinha junto um reinicio, uma pausa e aquela quebra de ritmo nada charmosa. Quando o WSL amadureceu, essa novela ganhou final feliz. O Linux passou a viver dentro do Windows de forma confiável, o terminal ficou no lugar certo, o editor ficou no lugar certo, e o contexto finalmente parou de fugir no meio da tarefa. O que antes era esforço para manter ambiente virou energia para construir produto.",
+        clippyText: "Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos novela de ambiente e mais código chegando em produção.",
         backText: "« voltar para página principal",
         footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
       },
@@ -590,12 +590,12 @@
         shellline: "thiago@satake.me:~$ cat windows-wsl-stack.md",
         titleBar: "technical/page/windows-wsl-stack",
         pageTitleText: "Development Environment: Windows + WSL",
-        introText: "This is a reference Windows + WSL setup that keeps a Linux-first development workflow without giving up a Windows-first desktop experience.",
-        transitionNote: "For many years, Linux dual boot with Windows was a common development approach. As WSL matured, it became possible to consolidate a smoother routine: Linux for build and runtime, Windows for desktop productivity.",
+        introText: "For a long time, working with Windows and Linux on the same machine felt like a technical sport: open one system, notice a missing tool, reboot, open the other one, repeat. Dual boot carried many teams through that era and did its job, because Windows handled daily productivity while Linux handled builds, automation, and production-like behavior. But it always came with a tax: broken focus, context switching, and too much energy spent organizing environments instead of solving problems. The shift started in 2016 with WSL 1 and became truly solid in 2019 with WSL 2, bringing a real Linux kernel, stronger compatibility, and a much steadier workflow. With VS Code integrated into WSL, Linux and Windows stopped competing for attention and started working as one stack. The result is simple: less setup drama, more time for code that actually matters.",
+        transitionNote: "Dual boot was plan A for years. In 2019, with WSL 2, the better plan arrived: Linux as the real base for development and runtime, with Windows supporting daily productivity, all without reboot gymnastics.",
         historyTitle: "1) Historical context: years of dual boot",
-        historyText: "For a large part of my career, the most reliable Linux development setup was a dedicated partition with constant switching between systems. It worked, but with operational cost: frequent reboots, isolated files, and extra friction for quick tasks.",
+        historyText: "For a large part of my career, the most reliable setup meant a dedicated Linux partition and constant system switching. It worked, but it had a toll: frequent reboots, scattered files, and quick tasks turning into mini expeditions.",
         wslTitle: "2) Migration to WSL as default",
-        wslText: "As WSL improved in compatibility and performance, it became possible to keep shell, build tooling, and automation on Linux while using Windows resources for documentation, browsing, and multitasking.",
+        wslText: "As WSL matured, it became possible to keep shell, build tooling, and automation on Linux while still enjoying Windows for documentation, browsing, and multitasking. No need to pick sides anymore.",
         photoStripIntro: "Realistic visual examples from a Windows + WSL setup:",
         photoCaption1: "Windows desktop with a WSL terminal open for project navigation and command execution.",
         photoCaption2: "VS Code connected to WSL with integrated terminal and project files in the Linux environment.",
@@ -608,13 +608,13 @@
         photoAlt3: "Terminal with cloud, kubectl, and docker commands",
         workflowTitle: "3) Current workflow",
         workflowItems: [
-          "Code and automation run on the Linux side (WSL).",
-          "Editing and navigation happen with a Windows-first interface.",
-          "Repositories and scripts stay Linux-oriented to reduce environment drift.",
-          "Final validation happens on desktop and mobile browsers before publishing."
+          "Code, build, and automation run on Linux (WSL), close to production behavior.",
+          "Editing and navigation stay on Windows with VS Code attached to WSL.",
+          "Repositories and scripts stay Linux-oriented to avoid the classic works-on-my-machine trap.",
+          "Before publishing, final checks run on desktop and mobile browsers."
         ],
         commandsTitle: "4) Practical Linux references (no drama)",
-        commandsIntro: "A quick view of the commands that usually show up when the terminal becomes the main character in cloud, container, and app build workflows.",
+        commandsIntro: "This is the terminal survival kit for real-life work: cloud, containers, builds, and quick diagnostics before any deploy.",
         commandsSummary: "",
         commandsVisualIntro: "Command examples by group, with terminal snapshots:",
         cmdCaption1: "Linux base: navigation, permissions, and quick inspection.",
@@ -645,24 +645,24 @@
         cmdAlt8: "Terminal with Node.js commands",
         cmdAlt9: "Terminal with Angular commands",
         vscodeTitle: "5) How I open VS Code in WSL",
-        vscodeIntro: "It is possible to open VS Code directly from WSL, keeping editor, terminal, and project files in the same Linux execution context. In this model, the code . command starts a session already attached to your distribution, and the status bar confirms WSL is active. If that command is unavailable, installing VS Code on Windows with the WSL extension (Remote - WSL) usually enables this flow.",
+        vscodeIntro: "You can open VS Code directly from WSL and keep editor, terminal, and project files in the same Linux context. In practice, run code . and VS Code opens already attached to your distro. If that command is missing, installing VS Code on Windows with the WSL extension (Remote - WSL) usually fixes it quickly.",
         vscodeWhyTitle: "Why this is fundamental",
         vscodeWhyItems: [
-          "Environment consistency: development, build, and runtime happen in the same Linux context.",
-          "Fewer path and permission issues: scripts, git, Docker, and kubectl follow one Unix standard.",
-          "Better I/O performance: editing directly in the Linux filesystem avoids common integration friction.",
-          "Real cloud-native flow: AWS, Azure, OCI, and Kubernetes stay in the correct execution context from day one."
+          "Same environment from first command to final run: development, build, and runtime on Linux.",
+          "Fewer path and permission surprises: scripts, git, Docker, and kubectl follow the same Unix rules.",
+          "Smoother editing in the Linux filesystem, without unnecessary integration pain.",
+          "Real cloud-native flow: AWS, Azure, OCI, and Kubernetes stay in the right context from day one."
         ],
         limitsTitle: "6) Good practices and boundaries",
         limitsItems: [
-          "Use WSL for development, automation, and environment consistency.",
-          "Use native Windows for office and communication tooling.",
-          "Avoid mixing paths and permissions carelessly across both worlds.",
-          "Keep scripts and routines standardized for onboarding and reproducibility."
+          "Use WSL for development and automation with predictable behavior.",
+          "Use native Windows for productivity, communication, and daily office tooling.",
+          "Do not mix paths and permissions carelessly, because that bill always arrives later.",
+          "Keep scripts and routines standardized for easy onboarding and reproducibility."
         ],
         clippyTitle: "7) Conclusion",
-        clippyIntro: "For a long time, developing software on one machine meant living between two worlds that did not naturally meet: Windows for corporate workflow, communication, and desktop productivity, and Linux for builds, automation, containers, and server-like behavior. Dual boot was the practical bridge of that era and, for many teams, it worked with real merit; it preserved delivery across conflicting needs, even with the hidden cost of breaking flow to reboot, switch systems, and recover context whenever a task crossed boundaries. As WSL matured, that story got a better ending: Linux became available inside Windows with real consistency, without abandoning work tools, without OS-switch friction, and without turning technical adjustments into operational logistics. What used to be a survival ritual became a continuous engineering flow, where energy returns to what actually matters: thinking, building, and shipping software.",
-        clippyText: "Dual boot was heroic in its time, especially from the late 2000s through much of the 2010s: two systems, lots of context, and a few existential reboots. Today the script changed. With WSL, Linux runs inside Windows without ceremony, without OS switching, and without the classic partition roulette. Result: less environment logistics and more code reaching production.",
+        clippyIntro: "The story went something like this: first, we learned to live between two worlds. Windows for daily work, Linux for predictable development. Dual boot held that bridge for years and was essential in many phases. But it always had a catch: whenever work crossed sides, a reboot came with it, plus a pause and that awkward rhythm break. When WSL matured, the story got a happier ending. Linux started living inside Windows in a reliable way, terminal stayed where it should, editor stayed where it should, and context finally stopped escaping in the middle of tasks. What used to be effort spent managing environments became energy spent building products.",
+        clippyText: "Dual boot was heroic in its time, especially from the late 2000s through much of the 2010s: two systems, lots of context, and a few existential reboots. Today the script changed. With WSL, Linux runs inside Windows without ceremony, without OS switching, and without the classic partition roulette. Result: less environment soap opera and more code reaching production.",
         backText: "« back to main page",
         footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
       }
