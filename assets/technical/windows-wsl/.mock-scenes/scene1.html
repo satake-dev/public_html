@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Windows Desktop + WSL</title>
+<style>
+  body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(160deg,#15418c,#1d6fd4);} 
+  .desktop{width:1600px;height:900px;position:relative;color:#fff;overflow:hidden}
+  .title{position:absolute;left:36px;top:24px;font-size:42px;font-weight:700}
+  .subtitle{position:absolute;left:36px;top:82px;font-size:22px;opacity:.92}
+  .term{position:absolute;left:72px;top:156px;width:1020px;height:650px;background:#121417;border-radius:10px;border:2px solid #4e545f;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .bar{height:38px;background:#2c3139;border-radius:8px 8px 0 0;line-height:38px;padding:0 14px;font-weight:600}
+  .content{font-family:Consolas,monospace;font-size:24px;line-height:1.8;color:#c9f8c9;padding:18px 24px;white-space:pre}
+  .panel{position:absolute;left:1140px;top:210px;width:390px;height:330px;background:#f4f8ff;color:#1f3257;border:2px solid #9fb5df;border-radius:10px;padding:16px 18px;box-sizing:border-box}
+  .panel h3{margin:0 0 10px;font-size:32px}
+  .panel p{margin:8px 0;font-size:22px}
+  .taskbar{position:absolute;left:0;right:0;bottom:0;height:48px;background:#262a31}
+  .start{position:absolute;left:14px;bottom:8px;background:#0f78fa;color:#fff;padding:7px 22px;border-radius:5px;font-weight:700}
+  .clock{position:absolute;right:18px;bottom:13px;color:#d6dbe6}
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="title">Desktop Windows + Terminal WSL</div>
+  <div class="subtitle">Fluxo diário de desenvolvimento com Linux no WSL e produtividade no Windows</div>
+  <div class="term">
+    <div class="bar">Ubuntu-22.04 - WSL</div>
+    <div class="content">thiago@DESKTOP-U06807I:~/develop/sources/github.com/satake.me/public_html$ pwd
+/home/thiago/develop/sources/github.com/satake.me/public_html
+$ git status -sb
+## main
+ M technical/windows-wsl-stack.html
+$ npm run build
+> build complete in 2.14s
+$ kubectl get pods -n platform
+api-5f8f6f5c7d-2t9m4     1/1 Running    0    2d</div>
+  </div>
+  <div class="panel">
+    <h3>Quick Notes</h3>
+    <p>- WSL distro: Ubuntu 22.04</p>
+    <p>- Node 22 + npm 10</p>
+    <p>- Docker + kubectl ativos</p>
+    <p>- AWS CLI e Azure CLI OK</p>
+  </div>
+  <div class="taskbar"></div>
+  <div class="start">Start</div>
+  <div class="clock">15:42  WSL OK</div>
+</div>
+</body>
+</html>

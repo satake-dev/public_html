@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquitetura Enterprise :: technical notes</title>
+  <meta name="description" content="Arquitetura enterprise de referência com frontend, BFF, gateway, identidade, backend, mensageria e dados.">
+  <style>
+    :root {
+      --bg: #001a66;
+      --panel: #c0c0c0;
+      --panel-dark: #808080;
+      --panel-light: #ffffff;
+      --text: #000000;
+      --green: #00ff66;
+      --blue: #000080;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+      color: var(--text);
+      font-family: "Verdana", "Arial", sans-serif;
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(980px, calc(100% - 24px));
+      margin: 18px auto 28px;
+      border: 3px solid var(--panel-light);
+      border-right-color: var(--panel-dark);
+      border-bottom-color: var(--panel-dark);
+      background: var(--panel);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .topline, .footerline {
+      background: #000080;
+      color: #ffffff;
+      padding: 6px 10px;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .shellline {
+      background: #000000;
+      color: var(--green);
+      padding: 6px 10px;
+      font-family: "Courier New", monospace;
+      border-top: 2px solid #ffffff;
+      border-bottom: 2px solid #808080;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    .content {
+      padding: 12px;
+    }
+
+    .window {
+      margin-bottom: 12px;
+      border: 2px solid var(--panel-light);
+      border-right-color: var(--panel-dark);
+      border-bottom-color: var(--panel-dark);
+      background: #efefef;
+    }
+
+    .window-title {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #ffffff;
+      padding: 4px 6px;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .window-body {
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .lang-button {
+      border: 2px outset #cccccc;
+      background: #c0c0c0;
+      color: #000000;
+      padding: 2px 6px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lang-button.active {
+      background: #000080;
+      color: #ffffff;
+      border-style: inset;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .section-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .section-list li {
+      margin-bottom: 6px;
+    }
+
+    .backlink {
+      margin-top: 10px;
+      display: inline-block;
+      font-weight: bold;
+      color: #0000cc;
+    }
+
+    @media (max-width: 760px) {
+      h1 { font-size: 24px; }
+      h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topline">https://www.satake.me/~thiago/technical/enterprise-architecture</div>
+    <div class="shellline" id="shellline">thiago@satake.me:~$ cat enterprise-architecture.md</div>
+
+    <div class="content">
+      <div class="window">
+        <div class="window-title">technical/page/enterprise-architecture</div>
+        <div class="window-body">
+          <div class="lang-switch">
+            <button class="lang-button active" type="button" id="lang-pt" aria-label="Mudar idioma para português">PT</button>
+            <button class="lang-button" type="button" id="lang-en" aria-label="Switch language to English">EN</button>
+          </div>
+
+          <h1 id="page-title">Arquitetura Enterprise de Referência</h1>
+          <p id="intro-text">Visão base para plataformas corporativas com foco em governança, evolução e escalabilidade.</p>
+
+          <h2 id="blocks-title">Blocos principais</h2>
+          <ul class="section-list" id="blocks-list"></ul>
+
+          <h2 id="flow-title">Fluxo de responsabilidade</h2>
+          <p id="flow-text"></p>
+
+          <h2 id="outcomes-title">Resultados esperados</h2>
+          <ul class="section-list" id="outcomes-list"></ul>
+
+          <a class="backlink" href="../index.html" id="back-link" aria-label="Voltar para a página principal">&laquo; voltar para página principal</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footerline" id="footerline">enterprise architecture baseline :: old-school look, modern systems</div>
+  </div>
+
+  <script>
+    const copy = {
+      pt: {
+        pageTitle: "Arquitetura Enterprise :: notas técnicas",
+        shellline: "thiago@satake.me:~$ cat enterprise-architecture.md",
+        title: "Arquitetura Enterprise de Referência",
+        intro: "Visão base para plataformas corporativas com foco em governança, evolução e escalabilidade.",
+        blocksTitle: "Blocos principais",
+        blocks: [
+          "Frontend Angular para experiência de usuário e composição de jornadas.",
+          "BFF para orquestração orientada ao canal e simplificação da borda.",
+          "Gateway para roteamento, políticas de segurança e observabilidade de entrada.",
+          "Keycloak para identidade, autenticação e autorização centralizadas.",
+          "Serviços Spring Boot para regras de negócio e capacidade de evolução por domínio.",
+          "Mensageria para desacoplamento, resiliência e processamento assíncrono.",
+          "Camada de dados para persistência transacional, consulta e histórico de eventos."
+        ],
+        flowTitle: "Fluxo de responsabilidade",
+        flowText: "Cliente -> Frontend -> BFF -> Gateway -> Serviços de domínio -> Mensageria/Dados. Cada camada tem papel claro para evitar acoplamento e facilitar governança técnica.",
+        outcomesTitle: "Resultados esperados",
+        outcomes: [
+          "Escalabilidade horizontal com fronteiras de responsabilidade explícitas.",
+          "Segurança e identidade tratadas como capacidades de plataforma.",
+          "Evolução incremental com menor risco em mudanças de negócio.",
+          "Maior rastreabilidade operacional por telemetria e eventos."
+        ],
+        backText: "« voltar para página principal",
+        footerline: "enterprise architecture baseline :: old-school look, modern systems"
+      },
+      en: {
+        pageTitle: "Enterprise Architecture :: technical notes",
+        shellline: "thiago@satake.me:~$ cat enterprise-architecture.md",
+        title: "Enterprise Reference Architecture",
+        intro: "Baseline architecture for enterprise platforms focused on governance, evolution, and scalability.",
+        blocksTitle: "Core building blocks",
+        blocks: [
+          "Angular frontend for user experience and journey composition.",
+          "BFF for channel-oriented orchestration and edge simplification.",
+          "Gateway for routing, security policies, and inbound observability.",
+          "Keycloak for centralized identity, authentication, and authorization.",
+          "Spring Boot services for domain rules and evolution by business capability.",
+          "Messaging layer for decoupling, resilience, and async processing.",
+          "Data layer for transactional persistence, querying, and event history."
+        ],
+        flowTitle: "Responsibility flow",
+        flowText: "Client -> Frontend -> BFF -> Gateway -> Domain services -> Messaging/Data. Each layer has a clear role to reduce coupling and improve technical governance.",
+        outcomesTitle: "Expected outcomes",
+        outcomes: [
+          "Horizontal scalability with explicit responsibility boundaries.",
+          "Security and identity handled as platform capabilities.",
+          "Incremental evolution with lower risk for business changes.",
+          "Stronger operational traceability through telemetry and events."
+        ],
+        backText: "« back to main page",
+        footerline: "enterprise architecture baseline :: old-school look, modern systems"
+      }
+    };
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function renderList(id, values) {
+      const list = document.getElementById(id);
+      list.innerHTML = "";
+      values.forEach((value) => {
+        const li = document.createElement("li");
+        li.textContent = value;
+        list.appendChild(li);
+      });
+    }
+
+    function applyLanguage(lang) {
+      const t = copy[lang];
+      document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
+      document.title = t.pageTitle;
+      setText("shellline", t.shellline);
+      setText("page-title", t.title);
+      setText("intro-text", t.intro);
+      setText("blocks-title", t.blocksTitle);
+      renderList("blocks-list", t.blocks);
+      setText("flow-title", t.flowTitle);
+      setText("flow-text", t.flowText);
+      setText("outcomes-title", t.outcomesTitle);
+      renderList("outcomes-list", t.outcomes);
+      setText("back-link", t.backText);
+      setText("footerline", t.footerline);
+
+      document.getElementById("lang-pt").classList.toggle("active", lang === "pt");
+      document.getElementById("lang-en").classList.toggle("active", lang === "en");
+
+      try {
+        localStorage.setItem("site-lang", lang);
+      } catch (error) {
+        // Ignore storage errors in restricted environments.
+      }
+    }
+
+    const initialLang = (() => {
+      try {
+        const saved = localStorage.getItem("site-lang");
+        if (saved === "pt" || saved === "en") return saved;
+      } catch (error) {
+        // Ignore storage errors.
+      }
+      return "pt";
+    })();
+
+    applyLanguage(initialLang);
+    document.getElementById("lang-pt").addEventListener("click", () => applyLanguage("pt"));
+    document.getElementById("lang-en").addEventListener("click", () => applyLanguage("en"));
+  </script>
+</body>
+</html>

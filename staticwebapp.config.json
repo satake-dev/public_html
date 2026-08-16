@@ -6,6 +6,24 @@
       "statusCode": 302
     },
     {
+      "route": "/technical/windows-wsl-stack",
+      "rewrite": "/technical/windows-wsl-stack.html"
+    },
+    {
+      "route": "/technical/enterprise-architecture",
+      "rewrite": "/technical/enterprise-architecture.html"
+    },
+    {
+      "route": "/~thiago/technical/windows-wsl-stack",
+      "redirect": "/technical/windows-wsl-stack",
+      "statusCode": 302
+    },
+    {
+      "route": "/~thiago/technical/enterprise-architecture",
+      "redirect": "/technical/enterprise-architecture",
+      "statusCode": 302
+    },
+    {
       "route": "/~thiago",
       "rewrite": "/index.html"
     },

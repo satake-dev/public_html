@@ -50,3 +50,14 @@ This repository is intentionally simple in technology and strong in meaning: it 
 I am very happy to see this evolution. What once required manual server administration, Apache module tuning, and per-user filesystem conventions can now be delivered reliably from cloud-native services tightly integrated with Git workflows.
 
 This project is a concrete proof of that evolution.
+
+## Technical Subpages Navigation
+
+The homepage now includes a dedicated technical card that acts as a navigation hub for deep-dive content.
+
+Current technical pages:
+
+- `/technical/windows-wsl-stack`: development environment story (Windows + WSL), including migration context from Linux dual boot and practical Linux command references.
+- `/technical/enterprise-architecture`: default enterprise architecture view (frontend, BFF, gateway, identity, services, messaging, and data).
+
+Both pages follow the same old-school visual language as the homepage and keep bilingual content (PT-BR and EN) with semantic parity.

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VS Code WSL</title>
+<style>
+  body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(165deg,#1f2632,#0f1720);} 
+  .desktop{width:1600px;height:900px;position:relative;color:#e8edf5;overflow:hidden}
+  .title{position:absolute;left:36px;top:24px;font-size:42px;font-weight:700}
+  .subtitle{position:absolute;left:36px;top:82px;font-size:22px;opacity:.9}
+  .code{position:absolute;left:70px;top:150px;width:1460px;height:690px;background:#20242c;border-radius:10px;border:2px solid #555d69;box-shadow:0 12px 28px rgba(0,0,0,.45)}
+  .bar{height:38px;background:#2e3440;border-radius:8px 8px 0 0;line-height:38px;padding:0 14px;font-size:18px}
+  .side{position:absolute;left:0;top:38px;bottom:0;width:250px;background:#2b3039;color:#d0d5df;padding:14px;box-sizing:border-box;font-family:Consolas,monospace;font-size:18px;line-height:1.8}
+  .editor{position:absolute;left:250px;right:0;top:38px;bottom:0;background:#1f232b;padding:18px 24px;box-sizing:border-box;font-family:Consolas,monospace;font-size:25px;line-height:1.6;color:#dbe5f5}
+  .status{position:absolute;left:70px;bottom:50px;width:1460px;height:28px;background:#0e7aa8;color:#fff;padding:4px 12px;box-sizing:border-box;font-size:18px}
+  .kw{color:#8ec7ff}.tag{color:#ffb86b}.tx{color:#dbe5f5}
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="title">VS Code conectado ao WSL</div>
+  <div class="subtitle">Projeto aberto no filesystem Linux com terminal integrado e contexto único de execução</div>
+  <div class="code">
+    <div class="bar">public_html - Visual Studio Code</div>
+    <div class="side">EXPLORER
+technical/
+  windows-wsl-stack.html
+assets/
+  windows-wsl/
+index.html</div>
+    <div class="editor"><span class="tag">&lt;h2&gt;</span><span class="tx">5) Como abrir o VS Code no WSL</span><span class="tag">&lt;/h2&gt;</span>
+
+<span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="kw">cd ~/develop/sources/github.com/satake.me/public_html</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="kw">code .</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="tx">confirmar status WSL: Ubuntu</span><span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span></div>
+  </div>
+  <div class="status">WSL: Ubuntu 22.04   UTF-8   LF   JavaScript</div>
+</div>
+</body>
+</html>
