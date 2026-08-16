@@ -118,6 +118,14 @@
       line-height: 1.2;
     }
 
+    .publication-date {
+      margin: -4px 0 10px;
+      color: #005a00;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
     h2 {
       margin: 0 0 8px;
       color: var(--blue);
@@ -419,6 +427,7 @@
           </div>
 
           <h1 id="page-title">Ambiente de Desenvolvimento: Windows + WSL</h1>
+          <p class="publication-date" id="publication-date">Publicado em: 16 de agosto de 2026</p>
           <p id="intro-text">Por muito tempo, trabalhar com Windows e Linux na mesma máquina era quase um esporte: abrir um sistema, perceber que faltava uma ferramenta, reiniciar, abrir o outro, repetir. O dual boot salvou muita gente nessa fase e teve seu mérito, porque permitia usar Windows para a rotina de escritório e Linux para build, automação e ambiente parecido com produção. Só que havia um preço: quebra de foco, troca de contexto e aquela sensação de que metade da energia ia para organizar o ambiente, não para resolver o problema. A virada começou em 2016 com o WSL 1 e ficou madura em 2019 com o WSL 2, trazendo kernel Linux real, mais compatibilidade e um fluxo muito mais estável. Com VS Code integrado ao WSL, Linux e Windows pararam de disputar atenção e começaram a jogar no mesmo time. No fim, a conta fecha simples: menos drama de setup, mais tempo para escrever código que importa.</p>
 
           <div class="note" id="transition-note">
@@ -567,6 +576,7 @@
         shellline: "thiago@satake.me:~$ cat windows-wsl-stack.md",
         titleBar: "technical/page/windows-wsl-stack",
         pageTitleText: "Ambiente de Desenvolvimento: Windows + WSL",
+        publicationDate: "Publicado em: 16 de agosto de 2026",
         introText: "Toda história de ambiente de desenvolvimento começa com uma pequena negociação entre ferramentas. Durante anos, a minha envolvia Windows de um lado, Linux do outro e uma máquina que precisava escolher quem seria naquele momento. O dual boot era o acordo possível: Windows para a rotina de escritório, Linux para build, automação e algo parecido com produção. Funcionava, até a próxima troca de sistema. Então veio o WSL: primeiro como promessa em 2016, depois, com o WSL 2 em 2019, como um caminho realmente estável, com kernel Linux de verdade e compatibilidade suficiente para parar de brigar com o setup. Com o VS Code entrando nessa conversa, Windows e Linux deixaram de disputar atenção e começaram a dividir trabalho. Esta é a história desse acordo de paz, com alguns comandos, reinícios evitados e nenhuma saudade da loteria de partições.",
         transitionNote: "O ponto de virada foi simples: o dual boot foi um ótimo plano A durante anos. Em 2019, o WSL 2 apresentou um plano melhor: Linux como base de desenvolvimento e execução, com o Windows apoiando o dia a dia, sem pedir um reinício como taxa de entrada.",
         historyTitle: "1) O tempo dos dois sistemas",
@@ -634,6 +644,7 @@
         shellline: "thiago@satake.me:~$ cat windows-wsl-stack.md",
         titleBar: "technical/page/windows-wsl-stack",
         pageTitleText: "Development Environment: Windows + WSL",
+        publicationDate: "Published on: August 16, 2026",
         introText: "Every development-environment story starts with a small negotiation between tools. For years, mine involved Windows on one side, Linux on the other, and a machine that needed to decide which one it would be for the moment. Dual boot was the workable agreement: Windows for office life, Linux for builds, automation, and something close to production. It worked, right up to the next system switch. Then WSL arrived: first as a promise in 2016 and, with WSL 2 in 2019, as a genuinely stable path with a real Linux kernel and enough compatibility to stop fighting the setup. Once VS Code joined that conversation, Windows and Linux stopped competing for attention and started sharing the workload. This is the story of that peace agreement, with a few commands, several avoided reboots, and no nostalgia for partition roulette.",
         transitionNote: "The turning point was simple: dual boot was a great plan A for years. In 2019, WSL 2 brought a better plan: Linux as the development and runtime base, with Windows supporting daily work without charging a reboot as an entry fee.",
         historyTitle: "1) The era of two systems",
@@ -743,6 +754,7 @@
       setText("shellline", t.shellline);
       setText("title-bar", t.titleBar);
       setText("page-title", t.pageTitleText);
+      setText("publication-date", t.publicationDate);
       setText("intro-text", t.introText);
       setText("transition-note", t.transitionNote);
       setText("history-title", t.historyTitle);
