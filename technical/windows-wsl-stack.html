@@ -295,11 +295,75 @@
       font-size: 13px;
     }
 
-    .backlink {
-      margin-top: 10px;
-      display: inline-block;
+    .home-nav {
+      display: inline-flex;
+      margin: 0 0 12px;
+      padding: 2px;
+      background: #000000;
+      border: 2px ridge #eeeeee;
+      box-shadow: 2px 2px 0 #808080;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 31px;
+      border: 2px outset #dcdcdc;
+      background: #000080;
+      box-shadow: inset 1px 1px 0 #4c8ee0, inset -1px -1px 0 #00004a;
+      color: #ffffff;
+      padding: 2px 8px 2px 3px;
+      font-family: "Tahoma", sans-serif;
+      font-size: 11px;
       font-weight: bold;
-      color: #0000cc;
+      text-decoration: none;
+      text-shadow: 1px 1px 0 #000000;
+    }
+
+    .home-link:visited {
+      color: #ffffff;
+    }
+
+    .home-link:hover {
+      background: #0000a0;
+    }
+
+    .home-link:active {
+      border-style: inset;
+      padding: 3px 7px 1px 4px;
+    }
+
+    .home-link:focus-visible {
+      outline: 2px dashed #ffff66;
+      outline-offset: 2px;
+    }
+
+    .home-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      border: 2px inset #c0c0c0;
+      background: #d8d8d8;
+      color: #000080;
+      font-family: "MS Sans Serif", "Tahoma", sans-serif;
+      font-size: 17px;
+      line-height: 1;
+      text-shadow: none;
+    }
+
+    .home-link-copy {
+      display: grid;
+      margin-left: 6px;
+      line-height: 1.1;
+    }
+
+    .home-link-kicker {
+      color: #66ffff;
+      font-family: "Courier New", monospace;
+      font-size: 8px;
+      font-weight: normal;
+      text-shadow: none;
     }
 
     .footerline {
@@ -339,6 +403,16 @@
       <div class="window">
         <div class="window-title" id="title-bar">technical/page/windows-wsl-stack</div>
         <div class="window-body">
+          <div class="home-nav">
+            <a class="home-link" href="../index.html" id="home-link" aria-label="Voltar para a página inicial">
+              <span class="home-icon" aria-hidden="true">&#8962;</span>
+              <span class="home-link-copy">
+                <span class="home-link-kicker" aria-hidden="true">www</span>
+                <span id="home-link-text">Página inicial</span>
+              </span>
+            </a>
+          </div>
+
           <div class="lang-switch">
             <button class="lang-button active" type="button" id="lang-pt" aria-label="Mudar idioma para português">PT</button>
             <button class="lang-button" type="button" id="lang-en" aria-label="Switch language to English">EN</button>
@@ -494,7 +568,6 @@
           <p class="clippy-story" id="clippy-intro">A história foi mais ou menos assim: primeiro, a gente aprendeu a conviver com dois mundos. Windows para o dia a dia, Linux para desenvolver com previsibilidade. O dual boot segurou essa ponte por anos e foi essencial em muita fase da carreira. Só que ele sempre vinha com uma pegadinha: toda vez que o trabalho atravessava de um lado para o outro, vinha junto um reinício, uma pausa e aquela quebra de ritmo nada charmosa. Quando o WSL amadureceu, essa novela ganhou final feliz. O Linux passou a viver dentro do Windows de forma confiável, o terminal ficou no lugar certo, o editor ficou no lugar certo, e o contexto finalmente parou de fugir no meio da tarefa. O que antes era esforço para manter ambiente virou energia para construir produto.</p>
           <p class="clippy-speech final" id="clippy-text">Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos novela de ambiente e mais código chegando em produção.</p>
 
-          <a class="backlink" href="../index.html" id="back-link" aria-label="Voltar para a página principal">&laquo; voltar para página principal</a>
         </div>
       </div>
     </div>
@@ -582,7 +655,8 @@
         clippyTitle: "7) Conclusão",
         clippyIntro: "A história foi mais ou menos assim: primeiro, a gente aprendeu a conviver com dois mundos. Windows para o dia a dia, Linux para desenvolver com previsibilidade. O dual boot segurou essa ponte por anos e foi essencial em muita fase da carreira. Só que ele sempre vinha com uma pegadinha: toda vez que o trabalho atravessava de um lado para o outro, vinha junto um reinicio, uma pausa e aquela quebra de ritmo nada charmosa. Quando o WSL amadureceu, essa novela ganhou final feliz. O Linux passou a viver dentro do Windows de forma confiável, o terminal ficou no lugar certo, o editor ficou no lugar certo, e o contexto finalmente parou de fugir no meio da tarefa. O que antes era esforço para manter ambiente virou energia para construir produto.",
         clippyText: "Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos novela de ambiente e mais código chegando em produção.",
-        backText: "« voltar para página principal",
+        homeText: "Página inicial",
+        homeAriaLabel: "Voltar para a página inicial",
         footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
       },
       en: {
@@ -663,7 +737,8 @@
         clippyTitle: "7) Conclusion",
         clippyIntro: "The story went something like this: first, we learned to live between two worlds. Windows for daily work, Linux for predictable development. Dual boot held that bridge for years and was essential in many phases. But it always had a catch: whenever work crossed sides, a reboot came with it, plus a pause and that awkward rhythm break. When WSL matured, the story got a happier ending. Linux started living inside Windows in a reliable way, terminal stayed where it should, editor stayed where it should, and context finally stopped escaping in the middle of tasks. What used to be effort spent managing environments became energy spent building products.",
         clippyText: "Dual boot was heroic in its time, especially from the late 2000s through much of the 2010s: two systems, lots of context, and a few existential reboots. Today the script changed. With WSL, Linux runs inside Windows without ceremony, without OS switching, and without the classic partition roulette. Result: less environment soap opera and more code reaching production.",
-        backText: "« back to main page",
+        homeText: "Home",
+        homeAriaLabel: "Return to home page",
         footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
       }
     };
@@ -742,7 +817,8 @@
       setText("clippy-title", t.clippyTitle);
       setText("clippy-intro", t.clippyIntro);
       setText("clippy-text", t.clippyText);
-      setText("back-link", t.backText);
+      setText("home-link-text", t.homeText);
+      document.getElementById("home-link").setAttribute("aria-label", t.homeAriaLabel);
       setText("footerline", t.footerline);
       renderList("workflow-list", t.workflowItems);
       setImageCopy("photo-img-1", "photo-frame-1", "photo-placeholder-1", "photo-caption-1", t.photoAlt1, t.photoPlaceholder1, t.photoCaption1);
