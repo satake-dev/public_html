@@ -131,6 +131,10 @@
       margin: 10px 0;
     }
 
+    .note:empty {
+      display: none;
+    }
+
     .section-list {
       margin: 0;
       padding-left: 18px;
@@ -211,6 +215,86 @@
       font-size: 13px;
     }
 
+    .commands-visual-intro {
+      margin: 12px 0 8px;
+      font-size: 13px;
+    }
+
+    .commands-visual-grid {
+      margin: 8px 0 14px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    .command-shot {
+      margin: 0;
+      border: 2px solid #bdbdbd;
+      border-right-color: #6f6f6f;
+      border-bottom-color: #6f6f6f;
+      background: #f4f4f4;
+      padding: 6px;
+    }
+
+    .command-shot-frame {
+      margin: 0;
+      border: 2px inset #555555;
+      background: #000000;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #cfcfcf;
+      font-family: "Courier New", monospace;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .command-shot-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 0;
+    }
+
+    .command-shot-placeholder {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .command-shot-frame.has-image .command-shot-placeholder {
+      display: none;
+    }
+
+    .command-shot-caption {
+      margin: 8px 2px 2px;
+      font-size: 12px;
+      color: #2a2a2a;
+    }
+
+    .clippy-speech {
+      margin: 10px 0 0;
+      padding: 10px;
+      background: #eaf3ff;
+      border: 1px solid #5e7ca8;
+      font-size: 13px;
+    }
+
+    .clippy-story {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .clippy-speech.final {
+      margin: 0 0 10px;
+      padding: 10px;
+      background: #eaf3ff;
+      border: 1px solid #5e7ca8;
+      font-size: 13px;
+    }
+
     .backlink {
       margin-top: 10px;
       display: inline-block;
@@ -238,6 +322,10 @@
 
       .photo-card.full {
         grid-column: 1 / -1;
+      }
+
+      .commands-visual-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
   </style>
@@ -269,30 +357,30 @@
           <h2 id="wsl-title">2) Evolução para WSL como padrão</h2>
           <p id="wsl-text">Com a evolução do WSL em compatibilidade e performance, é possível manter shell, ferramentas de build e automações no Linux, aproveitando no Windows os recursos que favorecem documentação, navegação e multitarefa.</p>
 
-          <p class="photo-strip-intro" id="photo-strip-intro">Capturas reais de referência do VS Code interagindo com WSL em um setup típico:</p>
+          <p class="photo-strip-intro" id="photo-strip-intro">Alguns exemplos visuais realistas de um setup Windows + WSL:</p>
           <div class="photo-strip" aria-label="Galeria de imagens do ambiente Windows e WSL">
             <figure class="photo-card">
               <div class="photo-frame" id="photo-frame-1">
-                <img id="photo-img-1" src="../assets/technical/windows-wsl/vscode-wsl-code-command.png" alt="Comando code executado no terminal WSL" loading="lazy">
-                <p class="photo-placeholder" id="photo-placeholder-1">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-code-command.png</p>
+                <img id="photo-img-1" src="../assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg" alt="Desktop Windows com terminal WSL aberto" loading="lazy">
+                <p class="photo-placeholder" id="photo-placeholder-1">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg</p>
               </div>
-              <figcaption class="photo-caption" id="photo-caption-1">Terminal WSL mostrando a abertura do VS Code com o comando code no contexto Linux.</figcaption>
+              <figcaption class="photo-caption" id="photo-caption-1">Desktop Windows com terminal WSL aberto para navegação e execução de comandos de projeto.</figcaption>
             </figure>
 
             <figure class="photo-card">
               <div class="photo-frame" id="photo-frame-2">
-                <img id="photo-img-2" src="../assets/technical/windows-wsl/vscode-wsl-remote-indicator.png" alt="Indicador remoto do VS Code em WSL" loading="lazy">
-                <p class="photo-placeholder" id="photo-placeholder-2">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-remote-indicator.png</p>
+                <img id="photo-img-2" src="../assets/technical/windows-wsl/vscode-remote-wsl-session.jpg" alt="VS Code conectado ao WSL" loading="lazy">
+                <p class="photo-placeholder" id="photo-placeholder-2">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-remote-wsl-session.jpg</p>
               </div>
-              <figcaption class="photo-caption" id="photo-caption-2">Indicador de sessão remota no VS Code confirmando execução ativa em WSL.</figcaption>
+              <figcaption class="photo-caption" id="photo-caption-2">VS Code conectado ao WSL com terminal integrado e arquivos do projeto no ambiente Linux.</figcaption>
             </figure>
 
             <figure class="photo-card full">
               <div class="photo-frame" id="photo-frame-3">
-                <img id="photo-img-3" src="../assets/technical/windows-wsl/vscode-wsl-extensions-view.png" alt="Lista de extensões do VS Code para WSL" loading="lazy">
-                <p class="photo-placeholder" id="photo-placeholder-3">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-extensions-view.png</p>
+                <img id="photo-img-3" src="../assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg" alt="Terminal com comandos cloud, kubectl e docker" loading="lazy">
+                <p class="photo-placeholder" id="photo-placeholder-3">Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg</p>
               </div>
-              <figcaption class="photo-caption" id="photo-caption-3">Visão de extensões no VS Code destacando componentes instalados para uso com WSL.</figcaption>
+              <figcaption class="photo-caption" id="photo-caption-3">Sessão de terminal com fluxo de cloud CLI, kubectl e docker em execução no WSL.</figcaption>
             </figure>
           </div>
 
@@ -304,66 +392,84 @@
             <li>Validações finais são feitas em browser desktop e mobile antes de publicar.</li>
           </ul>
 
-          <h2 id="commands-title">4) Referências Linux práticas</h2>
-          <p id="commands-intro">Comandos comuns em um setup para operação em cloud, acesso a Kubernetes, Docker e build de aplicações Java e Angular:</p>
-          <div class="code-block" aria-label="Comandos CLI para cloud, Kubernetes e build" id="commands-block"># Linux base
-pwd
-ls -la
-grep -R "TODO" .
-chmod +x scripts/deploy.sh
+          <h2 id="commands-title">4) Referências Linux práticas (sem drama)</h2>
+          <p id="commands-intro">Uma visão rápida dos comandos que costumam aparecer quando o terminal vira protagonista em ambientes cloud, containers e build de aplicações.</p>
+          <p class="note" id="commands-summary"></p>
 
-# AWS CLI
-aws configure
-aws sts get-caller-identity
-aws s3 ls
-aws eks update-kubeconfig --region us-east-1 --name <cluster-name>
+          <p class="commands-visual-intro" id="commands-visual-intro">Exemplos de comandos por grupo, com terminal em ação:</p>
+          <div class="commands-visual-grid" aria-label="Galeria de terminal por grupo de comando">
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-1">
+                <img id="cmd-img-1" src="../assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg" alt="Terminal com comandos Linux base" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-1">Imagem pendente: assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-1">Linux base: navegação, permissões e inspeção rápida.</figcaption>
+            </figure>
 
-# Azure CLI
-az login
-az account show --output table
-az aks get-credentials --resource-group <rg> --name <aks-name> --overwrite-existing
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-2">
+                <img id="cmd-img-2" src="../assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg" alt="Terminal com comandos AWS CLI" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-2">Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-2">AWS CLI: identidade, S3 e configuração de contexto EKS.</figcaption>
+            </figure>
 
-# OCI CLI
-oci setup config
-oci iam region list
-oci ce cluster list --compartment-id <compartment-ocid>
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-3">
+                <img id="cmd-img-3" src="../assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg" alt="Terminal com comandos Azure CLI" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-3">Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-3">Azure CLI: assinatura ativa e credenciais para AKS.</figcaption>
+            </figure>
 
-# Kubernetes (kubectl)
-kubectl config get-contexts
-kubectl config use-context <context-name>
-kubectl get nodes
-kubectl get pods -n <namespace>
-kubectl logs -f <pod-name> -n <namespace>
-kubectl describe pod <pod-name> -n <namespace>
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-4">
+                <img id="cmd-img-4" src="../assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg" alt="Terminal com comandos OCI CLI" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-4">Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-4">OCI CLI: validação de regiões e clusters gerenciados.</figcaption>
+            </figure>
 
-# Docker
-docker version
-docker ps -a
-docker build -t my-app:local .
-docker run --rm -p 8080:8080 my-app:local
-docker compose up -d
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-5">
+                <img id="cmd-img-5" src="../assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg" alt="Terminal com comandos kubectl" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-5">Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-5">kubectl: contexto, pods, logs e diagnose de workloads.</figcaption>
+            </figure>
 
-# Build Java (Maven/Gradle)
-mvn clean verify
-mvn spring-boot:run
-./gradlew clean build
-./gradlew bootRun
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-6">
+                <img id="cmd-img-6" src="../assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg" alt="Terminal com comandos Docker" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-6">Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-6">Docker: build local, execução e compose para ambientes.</figcaption>
+            </figure>
 
-# Node.js (runtime/tooling)
-node -v
-npm -v
-npm ci
-npm outdated
-npm audit --audit-level=high
-npm run dev
-npm run build
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-7">
+                <img id="cmd-img-7" src="../assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg" alt="Terminal com build Java" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-7">Imagem pendente: assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-7">Java build: Maven e Gradle para validação e execução.</figcaption>
+            </figure>
 
-# Frontend Angular
-npm ci
-npm run lint
-npm run test
-npx ng build --configuration production
-npx ng serve --host 0.0.0.0 --port 4200</div>
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-8">
+                <img id="cmd-img-8" src="../assets/technical/windows-wsl/vscode-remote-wsl-session.jpg" alt="Terminal com comandos Node.js" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-8">Imagem pendente: assets/technical/windows-wsl/vscode-remote-wsl-session.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-8">Node.js: versões, dependências, auditoria e build.</figcaption>
+            </figure>
+
+            <figure class="command-shot">
+              <div class="command-shot-frame" id="cmd-frame-9">
+                <img id="cmd-img-9" src="../assets/technical/windows-wsl/vscode-remote-wsl-session.jpg" alt="Terminal com comandos Angular" loading="lazy">
+                <p class="command-shot-placeholder" id="cmd-placeholder-9">Imagem pendente: assets/technical/windows-wsl/vscode-remote-wsl-session.jpg</p>
+              </div>
+              <figcaption class="command-shot-caption" id="cmd-caption-9">Angular: lint, testes e build de produção via CLI.</figcaption>
+            </figure>
+          </div>
 
           <h2 id="vscode-title">5) Como abrir o VS Code no WSL</h2>
           <p id="vscode-intro">É possível abrir o VS Code diretamente pelo ambiente WSL, mantendo editor, terminal e arquivos no mesmo contexto Linux do projeto. Nesse modelo, o comando <strong>code .</strong> inicia a sessão já conectada à distribuição, e o status no rodapé do editor indica que a execução está em WSL. Quando esse comando não está disponível, normalmente basta concluir a instalação do VS Code no Windows com a extensão WSL (Remote - WSL) para habilitar esse fluxo.</p>
@@ -383,6 +489,10 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
             <li>Evito misturar caminhos e permissões sem critério entre os dois mundos.</li>
             <li>Mantenho scripts e processos padronizados para facilitar onboarding e reprodução.</li>
           </ul>
+
+          <h2 id="clippy-title">7) Conclusão</h2>
+          <p class="clippy-story" id="clippy-intro">Durante muito tempo, desenvolver software em uma mesma máquina significava conviver com dois mundos que não se encontravam naturalmente: o Windows, necessário para a rotina corporativa, comunicação e aplicações de desktop, e o Linux, indispensável para build, automação, containers e previsibilidade de ambiente. O dual boot foi a ponte possível dessa época e, para muita gente, funcionou com mérito; era o método que permitia manter produtividade em contextos diferentes, mesmo com o custo silencioso de interromper o fluxo para reiniciar, trocar de sistema e recuperar contexto toda vez que uma tarefa atravessava fronteiras. Com a maturidade do WSL, essa história ganhou um final melhor: o Linux passou a existir dentro do Windows com consistência real, sem abandonar ferramentas de trabalho, sem a fricção da troca de sistema e sem transformar cada ajuste técnico em logística operacional. O que antes era um ritual de sobrevivência virou um fluxo contínuo de engenharia, em que a energia volta para o que realmente importa: pensar, construir e entregar software.</p>
+          <p class="clippy-speech final" id="clippy-text">Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos logística de ambiente e mais código chegando em produção.</p>
 
           <a class="backlink" href="../index.html" id="back-link" aria-label="Voltar para a página principal">&laquo; voltar para página principal</a>
         </div>
@@ -405,16 +515,16 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
         historyText: "Durante boa parte da carreira, a forma mais confiável para desenvolvimento Linux era manter uma partição dedicada e alternar entre sistemas. Funcionava, mas trazia custo operacional: reinícios frequentes, isolamento de arquivos e maior atrito para tarefas rápidas.",
         wslTitle: "2) Evolução para WSL como padrão",
         wslText: "Com a evolução do WSL em compatibilidade e performance, é possível manter shell, ferramentas de build e automações no Linux, aproveitando no Windows os recursos que favorecem documentação, navegação e multitarefa.",
-        photoStripIntro: "Capturas reais de referência do VS Code interagindo com WSL em um setup típico:",
-        photoCaption1: "Terminal WSL mostrando a abertura do VS Code com o comando code no contexto Linux.",
-        photoCaption2: "Indicador de sessão remota no VS Code confirmando execução ativa em WSL.",
-        photoCaption3: "Visão de extensões no VS Code destacando componentes instalados para uso com WSL.",
-        photoPlaceholder1: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-code-command.png",
-        photoPlaceholder2: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-remote-indicator.png",
-        photoPlaceholder3: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-wsl-extensions-view.png",
-        photoAlt1: "Comando code executado no terminal WSL",
-        photoAlt2: "Indicador remoto do VS Code em WSL",
-        photoAlt3: "Lista de extensões do VS Code para WSL",
+        photoStripIntro: "Alguns exemplos visuais realistas de um setup Windows + WSL:",
+        photoCaption1: "Desktop Windows com terminal WSL aberto para navegação e execução de comandos de projeto.",
+        photoCaption2: "VS Code conectado ao WSL com terminal integrado e arquivos do projeto no ambiente Linux.",
+        photoCaption3: "Sessão de terminal com fluxo de cloud CLI, kubectl e docker em execução no WSL.",
+        photoPlaceholder1: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg",
+        photoPlaceholder2: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/vscode-remote-wsl-session.jpg",
+        photoPlaceholder3: "Imagem pendente: adicione uma captura realista em assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        photoAlt1: "Desktop Windows com terminal WSL aberto",
+        photoAlt2: "VS Code conectado ao WSL",
+        photoAlt3: "Terminal com comandos cloud, kubectl e docker",
         workflowTitle: "3) Fluxo atual de trabalho",
         workflowItems: [
           "Código e automações rodam no ambiente Linux (WSL).",
@@ -422,8 +532,37 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
           "Repositório e scripts seguem padrão Linux para reduzir variação entre ambientes.",
           "Validações finais são feitas em browser desktop e mobile antes de publicar."
         ],
-        commandsTitle: "4) Referências Linux práticas",
-        commandsIntro: "Comandos comuns em um setup para operação em cloud, acesso a Kubernetes, Docker e build de aplicações Java e Angular:",
+        commandsTitle: "4) Referências Linux práticas (sem drama)",
+        commandsIntro: "Uma visão rápida dos comandos que costumam aparecer quando o terminal vira protagonista em ambientes cloud, containers e build de aplicações.",
+        commandsSummary: "",
+        commandsVisualIntro: "Exemplos de comandos por grupo, com terminal em ação:",
+        cmdCaption1: "Linux base: navegação, permissões e inspeção rápida.",
+        cmdCaption2: "AWS CLI: identidade, S3 e configuração de contexto EKS.",
+        cmdCaption3: "Azure CLI: assinatura ativa e credenciais para AKS.",
+        cmdCaption4: "OCI CLI: validação de regiões e clusters gerenciados.",
+        cmdCaption5: "kubectl: contexto, pods, logs e diagnose de workloads.",
+        cmdCaption6: "Docker: build local, execução e compose para ambientes.",
+        cmdCaption7: "Java build: Maven e Gradle para validação e execução.",
+        cmdCaption8: "Node.js: versões, dependências, auditoria e build.",
+        cmdCaption9: "Angular: lint, testes e build de produção via CLI.",
+        cmdPlaceholder1: "Imagem pendente: assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg",
+        cmdPlaceholder2: "Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder3: "Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder4: "Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder5: "Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder6: "Imagem pendente: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder7: "Imagem pendente: assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg",
+        cmdPlaceholder8: "Imagem pendente: assets/technical/windows-wsl/vscode-remote-wsl-session.jpg",
+        cmdPlaceholder9: "Imagem pendente: assets/technical/windows-wsl/vscode-remote-wsl-session.jpg",
+        cmdAlt1: "Terminal com comandos Linux base",
+        cmdAlt2: "Terminal com comandos AWS CLI",
+        cmdAlt3: "Terminal com comandos Azure CLI",
+        cmdAlt4: "Terminal com comandos OCI CLI",
+        cmdAlt5: "Terminal com comandos kubectl",
+        cmdAlt6: "Terminal com comandos Docker",
+        cmdAlt7: "Terminal com build Java",
+        cmdAlt8: "Terminal com comandos Node.js",
+        cmdAlt9: "Terminal com comandos Angular",
         vscodeTitle: "5) Como abrir o VS Code no WSL",
         vscodeIntro: "É possível abrir o VS Code diretamente pelo ambiente WSL, mantendo editor, terminal e arquivos no mesmo contexto Linux do projeto. Nesse modelo, o comando code . inicia a sessão já conectada à distribuição, e o status no rodapé do editor indica que a execução está em WSL. Quando esse comando não está disponível, normalmente basta concluir a instalação do VS Code no Windows com a extensão WSL (Remote - WSL) para habilitar esse fluxo.",
         vscodeWhyTitle: "Por que isso é fundamental",
@@ -440,6 +579,9 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
           "Evito misturar caminhos e permissões sem critério entre os dois mundos.",
           "Mantenho scripts e processos padronizados para facilitar onboarding e reprodução."
         ],
+        clippyTitle: "7) Conclusão",
+        clippyIntro: "Durante muito tempo, desenvolver software em uma mesma máquina significava conviver com dois mundos que não se encontravam naturalmente: o Windows, necessário para a rotina corporativa, comunicação e aplicações de desktop, e o Linux, indispensável para build, automação, containers e previsibilidade de ambiente. O dual boot foi a ponte possível dessa época e, para muita gente, funcionou com mérito; era o método que permitia manter produtividade em contextos diferentes, mesmo com o custo silencioso de interromper o fluxo para reiniciar, trocar de sistema e recuperar contexto toda vez que uma tarefa atravessava fronteiras. Com a maturidade do WSL, essa história ganhou um final melhor: o Linux passou a existir dentro do Windows com consistência real, sem abandonar ferramentas de trabalho, sem a fricção da troca de sistema e sem transformar cada ajuste técnico em logística operacional. O que antes era um ritual de sobrevivência virou um fluxo contínuo de engenharia, em que a energia volta para o que realmente importa: pensar, construir e entregar software.",
+        clippyText: "Dual boot foi heróico no seu tempo, principalmente entre o fim dos anos 2000 e boa parte da década de 2010: dois sistemas, muito contexto e alguns reinícios existenciais. Hoje o roteiro mudou. Com WSL, o Linux roda dentro do Windows sem cerimônia, sem troca de SO e sem a clássica loteria da partição. Resultado: menos logística de ambiente e mais código chegando em produção.",
         backText: "« voltar para página principal",
         footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
       },
@@ -454,16 +596,16 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
         historyText: "For a large part of my career, the most reliable Linux development setup was a dedicated partition with constant switching between systems. It worked, but with operational cost: frequent reboots, isolated files, and extra friction for quick tasks.",
         wslTitle: "2) Migration to WSL as default",
         wslText: "As WSL improved in compatibility and performance, it became possible to keep shell, build tooling, and automation on Linux while using Windows resources for documentation, browsing, and multitasking.",
-        photoStripIntro: "Real reference captures of VS Code interacting with WSL in a typical setup:",
-        photoCaption1: "WSL terminal showing VS Code being launched with the code command in Linux context.",
-        photoCaption2: "Remote session indicator in VS Code confirming active execution in WSL.",
-        photoCaption3: "Extensions view in VS Code highlighting installed components for WSL usage.",
-        photoPlaceholder1: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-wsl-code-command.png",
-        photoPlaceholder2: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-wsl-remote-indicator.png",
-        photoPlaceholder3: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-wsl-extensions-view.png",
-        photoAlt1: "code command executed in WSL terminal",
-        photoAlt2: "VS Code remote indicator in WSL",
-        photoAlt3: "VS Code extensions list for WSL",
+        photoStripIntro: "Realistic visual examples from a Windows + WSL setup:",
+        photoCaption1: "Windows desktop with a WSL terminal open for project navigation and command execution.",
+        photoCaption2: "VS Code connected to WSL with integrated terminal and project files in the Linux environment.",
+        photoCaption3: "Terminal session running cloud CLI, kubectl, and docker workflows inside WSL.",
+        photoPlaceholder1: "Pending image: add a realistic capture to assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg",
+        photoPlaceholder2: "Pending image: add a realistic capture to assets/technical/windows-wsl/vscode-remote-wsl-session.jpg",
+        photoPlaceholder3: "Pending image: add a realistic capture to assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        photoAlt1: "Windows desktop with WSL terminal open",
+        photoAlt2: "VS Code connected to WSL",
+        photoAlt3: "Terminal with cloud, kubectl, and docker commands",
         workflowTitle: "3) Current workflow",
         workflowItems: [
           "Code and automation run on the Linux side (WSL).",
@@ -471,8 +613,37 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
           "Repositories and scripts stay Linux-oriented to reduce environment drift.",
           "Final validation happens on desktop and mobile browsers before publishing."
         ],
-        commandsTitle: "4) Practical Linux references",
-        commandsIntro: "Common commands in a setup for cloud operations, Kubernetes access, Docker workflows, and Java/Angular builds:",
+        commandsTitle: "4) Practical Linux references (no drama)",
+        commandsIntro: "A quick view of the commands that usually show up when the terminal becomes the main character in cloud, container, and app build workflows.",
+        commandsSummary: "",
+        commandsVisualIntro: "Command examples by group, with terminal snapshots:",
+        cmdCaption1: "Linux base: navigation, permissions, and quick inspection.",
+        cmdCaption2: "AWS CLI: identity, S3, and EKS context configuration.",
+        cmdCaption3: "Azure CLI: active subscription and AKS credentials.",
+        cmdCaption4: "OCI CLI: region checks and managed cluster validation.",
+        cmdCaption5: "kubectl: context, pods, logs, and workload diagnosis.",
+        cmdCaption6: "Docker: local build, runtime, and compose environments.",
+        cmdCaption7: "Java build: Maven and Gradle for validation and execution.",
+        cmdCaption8: "Node.js: versions, dependencies, audits, and build.",
+        cmdCaption9: "Angular: lint, tests, and production build via CLI.",
+        cmdPlaceholder1: "Pending image: assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg",
+        cmdPlaceholder2: "Pending image: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder3: "Pending image: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder4: "Pending image: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder5: "Pending image: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder6: "Pending image: assets/technical/windows-wsl/cloud-cli-kubectl-docker.jpg",
+        cmdPlaceholder7: "Pending image: assets/technical/windows-wsl/windows-desktop-wsl-terminal.jpg",
+        cmdPlaceholder8: "Pending image: assets/technical/windows-wsl/vscode-remote-wsl-session.jpg",
+        cmdPlaceholder9: "Pending image: assets/technical/windows-wsl/vscode-remote-wsl-session.jpg",
+        cmdAlt1: "Terminal with Linux base commands",
+        cmdAlt2: "Terminal with AWS CLI commands",
+        cmdAlt3: "Terminal with Azure CLI commands",
+        cmdAlt4: "Terminal with OCI CLI commands",
+        cmdAlt5: "Terminal with kubectl commands",
+        cmdAlt6: "Terminal with Docker commands",
+        cmdAlt7: "Terminal with Java build commands",
+        cmdAlt8: "Terminal with Node.js commands",
+        cmdAlt9: "Terminal with Angular commands",
         vscodeTitle: "5) How I open VS Code in WSL",
         vscodeIntro: "It is possible to open VS Code directly from WSL, keeping editor, terminal, and project files in the same Linux execution context. In this model, the code . command starts a session already attached to your distribution, and the status bar confirms WSL is active. If that command is unavailable, installing VS Code on Windows with the WSL extension (Remote - WSL) usually enables this flow.",
         vscodeWhyTitle: "Why this is fundamental",
@@ -489,6 +660,9 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
           "Avoid mixing paths and permissions carelessly across both worlds.",
           "Keep scripts and routines standardized for onboarding and reproducibility."
         ],
+        clippyTitle: "7) Conclusion",
+        clippyIntro: "For a long time, developing software on one machine meant living between two worlds that did not naturally meet: Windows for corporate workflow, communication, and desktop productivity, and Linux for builds, automation, containers, and server-like behavior. Dual boot was the practical bridge of that era and, for many teams, it worked with real merit; it preserved delivery across conflicting needs, even with the hidden cost of breaking flow to reboot, switch systems, and recover context whenever a task crossed boundaries. As WSL matured, that story got a better ending: Linux became available inside Windows with real consistency, without abandoning work tools, without OS-switch friction, and without turning technical adjustments into operational logistics. What used to be a survival ritual became a continuous engineering flow, where energy returns to what actually matters: thinking, building, and shipping software.",
+        clippyText: "Dual boot was heroic in its time, especially from the late 2000s through much of the 2010s: two systems, lots of context, and a few existential reboots. Today the script changed. With WSL, Linux runs inside Windows without ceremony, without OS switching, and without the classic partition roulette. Result: less environment logistics and more code reaching production.",
         backText: "« back to main page",
         footerline: "linux workflow + windows desktop :: old-school style, modern delivery"
       }
@@ -499,6 +673,23 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
     }
 
     function setImageCopy(imageId, frameId, placeholderId, captionId, altText, placeholderText, captionText) {
+      const img = document.getElementById(imageId);
+      const frame = document.getElementById(frameId);
+      const placeholder = document.getElementById(placeholderId);
+      const caption = document.getElementById(captionId);
+
+      img.alt = altText;
+      placeholder.textContent = placeholderText;
+      caption.textContent = captionText;
+
+      if (img.complete && img.naturalWidth > 0) {
+        frame.classList.add("has-image");
+      } else {
+        frame.classList.remove("has-image");
+      }
+    }
+
+    function setCommandShot(imageId, frameId, placeholderId, captionId, altText, placeholderText, captionText) {
       const img = document.getElementById(imageId);
       const frame = document.getElementById(frameId);
       const placeholder = document.getElementById(placeholderId);
@@ -542,16 +733,30 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
       setText("workflow-title", t.workflowTitle);
       setText("commands-title", t.commandsTitle);
       setText("commands-intro", t.commandsIntro);
+      setText("commands-summary", t.commandsSummary);
+      setText("commands-visual-intro", t.commandsVisualIntro);
       setText("vscode-title", t.vscodeTitle);
       setText("vscode-intro", t.vscodeIntro);
       setText("vscode-why-title", t.vscodeWhyTitle);
       setText("limits-title", t.limitsTitle);
+      setText("clippy-title", t.clippyTitle);
+      setText("clippy-intro", t.clippyIntro);
+      setText("clippy-text", t.clippyText);
       setText("back-link", t.backText);
       setText("footerline", t.footerline);
       renderList("workflow-list", t.workflowItems);
       setImageCopy("photo-img-1", "photo-frame-1", "photo-placeholder-1", "photo-caption-1", t.photoAlt1, t.photoPlaceholder1, t.photoCaption1);
       setImageCopy("photo-img-2", "photo-frame-2", "photo-placeholder-2", "photo-caption-2", t.photoAlt2, t.photoPlaceholder2, t.photoCaption2);
       setImageCopy("photo-img-3", "photo-frame-3", "photo-placeholder-3", "photo-caption-3", t.photoAlt3, t.photoPlaceholder3, t.photoCaption3);
+      setCommandShot("cmd-img-1", "cmd-frame-1", "cmd-placeholder-1", "cmd-caption-1", t.cmdAlt1, t.cmdPlaceholder1, t.cmdCaption1);
+      setCommandShot("cmd-img-2", "cmd-frame-2", "cmd-placeholder-2", "cmd-caption-2", t.cmdAlt2, t.cmdPlaceholder2, t.cmdCaption2);
+      setCommandShot("cmd-img-3", "cmd-frame-3", "cmd-placeholder-3", "cmd-caption-3", t.cmdAlt3, t.cmdPlaceholder3, t.cmdCaption3);
+      setCommandShot("cmd-img-4", "cmd-frame-4", "cmd-placeholder-4", "cmd-caption-4", t.cmdAlt4, t.cmdPlaceholder4, t.cmdCaption4);
+      setCommandShot("cmd-img-5", "cmd-frame-5", "cmd-placeholder-5", "cmd-caption-5", t.cmdAlt5, t.cmdPlaceholder5, t.cmdCaption5);
+      setCommandShot("cmd-img-6", "cmd-frame-6", "cmd-placeholder-6", "cmd-caption-6", t.cmdAlt6, t.cmdPlaceholder6, t.cmdCaption6);
+      setCommandShot("cmd-img-7", "cmd-frame-7", "cmd-placeholder-7", "cmd-caption-7", t.cmdAlt7, t.cmdPlaceholder7, t.cmdCaption7);
+      setCommandShot("cmd-img-8", "cmd-frame-8", "cmd-placeholder-8", "cmd-caption-8", t.cmdAlt8, t.cmdPlaceholder8, t.cmdCaption8);
+      setCommandShot("cmd-img-9", "cmd-frame-9", "cmd-placeholder-9", "cmd-caption-9", t.cmdAlt9, t.cmdPlaceholder9, t.cmdCaption9);
       renderList("vscode-why-list", t.vscodeWhyItems);
       renderList("limits-list", t.limitsItems);
 
@@ -578,6 +783,13 @@ npx ng serve --host 0.0.0.0 --port 4200</div>
     ["photo-img-1", "photo-img-2", "photo-img-3"].forEach((id) => {
       const img = document.getElementById(id);
       const frame = document.getElementById(id.replace("photo-img", "photo-frame"));
+      img.addEventListener("load", () => frame.classList.add("has-image"));
+      img.addEventListener("error", () => frame.classList.remove("has-image"));
+    });
+
+    ["cmd-img-1", "cmd-img-2", "cmd-img-3", "cmd-img-4", "cmd-img-5", "cmd-img-6", "cmd-img-7", "cmd-img-8", "cmd-img-9"].forEach((id) => {
+      const img = document.getElementById(id);
+      const frame = document.getElementById(id.replace("cmd-img", "cmd-frame"));
       img.addEventListener("load", () => frame.classList.add("has-image"));
       img.addEventListener("error", () => frame.classList.remove("has-image"));
     });
